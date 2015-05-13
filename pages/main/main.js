@@ -3,21 +3,37 @@
  * 注意这页面里面的相对路径都是根目录
  */
 var exec = require('child_process').exec;
-
+var path = require("path");
+var execPath = path.dirname( process.execPath );
+var defaultHost = path.join(execPath , "/host.txt");
+var detaultChrome = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
 /*选择hosts文件*/
 var hostBtn = document.getElementById("host_file");
 var chromeFile = document.getElementById("chrome_file");
+var hostLabel = document.getElementById("host_file_label");
+var chromeLabel = document.getElementById("chrome_file_label");
 var chromePath;
 
+//init
+hostLabel.innerHTML = hostBtn.defaultValue = localStorage.getItem("hostFilePath") || defaultHost;
+chromeLabel.innerHTML = chromePath = chromeFile.defaultValue = localStorage.getItem("chromePath") || detaultChrome;
+//hostLabel.innerHTML = hostBtn.defaultValue || "未选择";
+//chromeLabel.innerHTML = chromePath.defaultValue || "未选择";
 
-
+process.mainModule.exports.setConfig("hostFilePath", hostBtn.defaultValue);
+process.mainModule.exports.setConfig("chromePath", chromePath);
+//init
 hostBtn.addEventListener("change", function(event) {
+    localStorage.setItem("hostFilePath", event.target.value);
     process.mainModule.exports.setConfig("hostFilePath", event.target.value);
+    hostLabel.innerHTML =  event.target.value;
 }, false);
 
 chromeFile.addEventListener("change", function(event) {
-    process.mainModule.exports.setConfig("chromePath", event.target.value);
     chromePath = event.target.value;
+    localStorage.setItem("chromePath", chromePath);
+    process.mainModule.exports.setConfig("chromePath", chromePath);
+    chromeLabel.innerHTML = chromePath;
 }, false);
 
 
@@ -31,11 +47,14 @@ btn.addEventListener("click", function(event) {
         if (chromePath) {
             var arr = chromePath.split('\\');
             var exeName = arr.pop();
+            var devPath = path.join(execPath, "/chrome-dev");
+
             chromePath = arr.join('\\');
-            command = 'start \/d "' + chromePath + '" ' + exeName + ' --proxy-server="localhost:9000"  --user-data-dir=D:/chrome-dev  --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
+
+            command = 'start \/d "' + chromePath + '" ' + exeName + ' --proxy-server="localhost:9000"  --user-data-dir='+ devPath +'  --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
         }
         else {
-            command = 'start chrome --proxy-server="http://127.0.0.1:9000" --user-data-dir=D:/chrome-dev --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
+            command = 'start chrome --proxy-server="http://127.0.0.1:9000" --user-data-dir='+ devPath + ' --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
         }
         exec(command, function (error) {
 
@@ -71,7 +90,7 @@ win.on('minimize', function() {
 
     tray.on("click", function() {
         win.show();
-        win.resizeTo(800,600);
+        win.resizeTo(650,500);
     })
 
 });

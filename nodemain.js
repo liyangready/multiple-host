@@ -1,19 +1,12 @@
 /**
  * Created by leon.li on 2015/5/4.
  */
-///*-----------------本地调试---------------------*/
-//var log4js = require('log4js');
-//log4js.loadAppender('file');
-//log4js.addAppender(log4js.appenders.file('../log/node.log'), 'node');
-//
-//var logger = log4js.getLogger("node");
-//logger.setLevel('info');
-//
-//logger.info('node-main.js is running at ' + new Date());
-/////*-----------------调试---------------------*/
+
 var easyProxy = require("./lib/easyproxy.js");
 var findHost = require("./lib/findhost.js");
+var dirname = require('./lib/util').dirname;
 var dns = require('dns');
+
 
 var CONFIG = {
     "hostFilePath": null,
@@ -27,6 +20,7 @@ function setConfig(name, value) {
 
 function startNode() {
     logInfo("log", "node代码启动成功");
+
     var nwProxy = new easyProxy({
         port: 9000,
         onBeforeRequest: function(req) {

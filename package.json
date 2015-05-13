@@ -3,12 +3,12 @@
     "main": "main.html",
     "node-main": "nodemain.js",
     "window": {
-        "toolbar": true,
+        "toolbar": false,
         "width": 650,
-        "height": 500,
+        "height": 600,
         "position": "center",
         "min_width": 650,
-        "min_height": 500,
+        "min_height": 600,
         "max_width": 1366,
         "max_height": 768
     },

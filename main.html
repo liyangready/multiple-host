@@ -36,21 +36,21 @@
 
         }
         .buttons {
-            position: absolute;
-            right: 30px;
-            top: 100px;
-            width: 150px;
-            height: 150px;
-
-
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*top: 100px;*/
+            /*width: 150px;*/
+            height: 50px;
+            margin-top: 20px;;
+            text-align: center;
         }
         #open_btn {
-            width: 150px;
-            height: 50px;
+            width: 120px;
+            height: 40px;
             border-radius: 5px;
             border: 1px solid gray;
             color: #fff;
-            background-color: gray;
+            background-color: rgb(36, 174, 111);
             cursor: pointer;
             outline: none;
         }
@@ -83,7 +83,8 @@
         .configArea .config-text { }
         .config-item { margin-top:20px; display: flex;flex-flow: row; font-size: 14px; }
         .config-item .label{ flex: 1; }
-        .config-item .item { flex: 2; cursor: pointer; }
+        .config-item .item { flex: 3; cursor: pointer; }
+        .config-item .item .path-text{ text-decoration: underline; cursor: pointer; color: #60C7AB; }
         .logArea { margin: 20px;}
         .logArea .logWrapper { height: 200px; background-color: #808080; overflow: auto;  font-size: 14px; padding-left: 20px; margin-top: 30px; }
         .logArea .logWrapper p { height: 20px; line-height: 20px; }
@@ -100,19 +101,27 @@
         <h2 class="config-text">配置项</h2>
         <div class="config-item">
             <p class="label">自定义hosts文件地址：</p>
-            <input type="file" class="item" id="host_file"/>
+            <div class="item">
+                <label for="host_file"  title="点击修改" class="path-text" id="host_file_label">未选择</label>
+                <input type="file" style="display: none;" id="host_file" value="D:workspace\node-webkit" />
+            </div>
         </div>
         <div class="config-item">
             <p class="label">自定义chrome.exe地址：</p>
-            <input type="file" class="item" id="chrome_file"/>
+            <div class="item">
+                <label for="chrome_file" title="点击修改" class="path-text" id="chrome_file_label">未选择</label>
+                <input type="file" style="display: none;" id="chrome_file" />
+            </div>
+
         </div>
     </div>
-    <div class="buttons">
-        <button id="open_btn">唤起代理chrome</button>
-    </div>
+
     <div class="logArea">
         <h2 class="config-text">日志</h2>
         <div class="logWrapper" id="log_area"></div>
+    </div>
+    <div class="buttons">
+        <button id="open_btn">唤起代理chrome</button>
     </div>
 </div>
 
