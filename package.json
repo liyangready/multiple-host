@@ -1,9 +1,10 @@
 {
-    "name": "nw-demo",
+    "name": "nw-test",
     "main": "main.html",
     "node-main": "nodemain.js",
+    "author": "leon.li@qunar.com",
     "window": {
-        "toolbar": false,
+        "toolbar": true,
         "width": 650,
         "height": 600,
         "position": "center",
@@ -12,5 +13,12 @@
         "max_width": 1366,
         "max_height": 768
     },
-    "node-remote": "*"
+    "packages": {
+        "win": {
+            "url": "http://localhost:3000/updapp.zip"
+        }
+    },
+    "manifestUrl": "http://localhost:3000/package.json",
+    "node-remote": "*",
+    "version": "0.0.1"
 }

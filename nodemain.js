@@ -22,7 +22,7 @@ function startNode() {
     logInfo("log", "node代码启动成功");
 
     var nwProxy = new easyProxy({
-        port: 9000,
+        port: 9393,
         onBeforeRequest: function(req) {
             try {
                 var host = findHost(CONFIG.hostFilePath, req.host);
