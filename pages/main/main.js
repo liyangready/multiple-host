@@ -24,13 +24,18 @@ process.mainModule.exports.setConfig("hostFilePath", hostBtn.defaultValue);
 process.mainModule.exports.setConfig("chromePath", chromeFile.defaultValue);
 //init
 hostBtn.addEventListener("change", function(event) {
+    if (!event.target.value) {
+        return;
+    }
     localStorage.setItem("hostFilePath", event.target.value);
     process.mainModule.exports.setConfig("hostFilePath", event.target.value);
     hostLabel.innerHTML =  event.target.value;
 }, false);
 
 chromeFile.addEventListener("change", function(event) {
-
+    if (!event.target.value) {
+        return;
+    }
     localStorage.setItem("chromePath", event.target.value);
     process.mainModule.exports.setConfig("chromePath", event.target.value);
     chromeLabel.innerHTML = event.target.value;
