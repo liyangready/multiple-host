@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>本地多hosts工具-v0.0.2</title>
+    <title>本地多hosts工具-beta</title>
     <style>
         body, div, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, img, form, fieldset, blockquote {
             margin: 0; padding: 0; border: 0;
@@ -92,13 +92,17 @@
         .logArea .logWrapper .warn { color: yellow ; }
         .logArea .logWrapper .error { color: red ;  }
         .logArea .logWrapper .times { display: inline-block; padding:1px 2px; height: 15px; line-height: 15px; background-color: rgb(87, 198, 234); border: 1px; border-radius: 5px; text-align: center; margin-right: 5px; }
+        .version{ text-align: right; padding-right: 20px; color: #CCC; font-size: 12px; }
+        .mask { position: fixed; width: 100%; height: 100%; z-index: 999; background-color: #000; opacity: 0.5; top: 0; left: 0; }
+        .loading { position: fixed; width: 160px; height: 160px; margin-left: -80px; margin-top: -80px; z-index: 1000; color: #fff; top: 50%; left: 50%; }
+        .loading .loaded{ font-size: 40px; margin-top: 10px; text-align: center; }
     </style>
 </head>
 <body onload="process.mainModule.exports.start()">
 <div id="inset">
-    <h1 class="shimmer">NW.js <span id="version">v0.0.1</span></h1>
+    <h1 class="shimmer">NW.js</h1>
     <div class="configArea">
-        <h2 class="config-text">配置项<span id="loaded"></span></h2>
+        <h2 class="config-text">配置项</h2>
         <div class="config-item">
             <p class="label">自定义hosts文件地址：</p>
             <div class="item">
@@ -123,106 +127,32 @@
     <div class="buttons">
         <button id="open_btn">唤起代理chrome</button>
     </div>
+    <div class="version" id="version"></div>
+
+
+</div>
+<div id="loading_wrapper" style="display: none;">
+    <div class="mask"></div>
+    <div class="loading" id="loading_content">
+        <p class="loaded" id="loaded">0%</p>
+        <img src="./image/loading.gif" alt=""/>
+    </div>
 </div>
 
-
-<script>
-    var gui = require('nw.gui');
-    var copyPath, execPath;
-    if(gui.App.argv.length){
-        copyPath = gui.App.argv[0];
-        execPath = gui.App.argv[1];
-    }
-    //download new version of app in tmp
-    //unpack
-    //run updater
-    //updater will copy itself to origin directory
-    //updater will run app
-    var pkg = require('./package.json');
-    var request = require('request');
-    var url = require('url');
-    var path = require('path');
-    var os = require('os');
-    var fs = require('fs');
-    var k = 0;
-    var d = false;
-    var updater = require('./lib/updater.js');
-    var upd = new updater(pkg);
-    var newVersionCheckIntervalId = null;
-    var tryingForNewVersion = false;
-
-    //for test purposes
-
-debugger
-    if(!copyPath){
-        request.get(url.resolve(pkg.manifestUrl, '/version/'+ pkg.version));
-        document.getElementById('version').innerHTML = 'current version ' + pkg.version;
-//        newVersionCheckIntervalId = setInterval(function(){
-//            if(!d && !tryingForNewVersion) {
-                tryingForNewVersion = true; //lock
-                upd.checkNewVersion(versionChecked);
-//            }
-//        }, 500);
-    } else {
-        document.getElementById('version').innerHTML = 'copying app';
-        upd.install(copyPath, newAppInstalled);
-
-        function newAppInstalled(err){
-            if(err){
-                console.log(err);
-                return;
-            }
-            upd.run(execPath, null);
-            gui.App.quit();
-        }
-    }
-    function versionChecked(err, newVersionExists, manifest){
-        tryingForNewVersion = false; //unlock
-        if(err){
-            console.log(err);
-            return Error(err);
-        }
-        else if(d){
-            console.log('Already downloading');
-            return;
-        }
-        else if(!newVersionExists){
-            console.log('No new version exists');
-            return;
-        }
-        d = true;
-        clearInterval(newVersionCheckIntervalId);
-        var loaded = 0;
-        var newVersion = upd.download(function(error, filename){
-
-            newVersionDownloaded(error, filename, manifest);
-        }, manifest);
-        newVersion.on('data', function(chunk){
-            loaded+=chunk.length;
-            document.getElementById('loaded').innerHTML = "New version loading " + Math.floor(loaded / newVersion['content-length'] * 100) + '%';
-        })
-    }
-    function newVersionDownloaded(err, filename, manifest){
-
-        if(err){
-            console.log(err)
-            return Error(err);
-        }
-        document.getElementById('loaded').innerHTML = "unpacking: " + filename;
-        upd.unpack(filename, newVersionUnpacked, manifest);
-    }
-    function newVersionUnpacked(err, newAppPath){
-
-        if(err){
-            console.log(err)
-            return Error(err);
-        }
-        var runner = upd.runInstaller(newAppPath, [upd.getAppPath(), upd.getAppExec()]);
-        gui.App.quit();
-    }
-
-
-</script>
+<!--<script>-->
+    <!--var dns = require("dns");-->
+    <!--var time = new Date();-->
+    <!--dns.lookup("www.yingxiang.com", function(err, addresses) {-->
+        <!--console.log("wiki.corp.qunar.com 1", " use " , (new Date() - time));-->
+    <!--});-->
+    <!--dns.resolve("www.yingxiang.com", function(err, addresses) {-->
+        <!--console.log("wiki.corp.qunar.com 2", " use " , (new Date() - time));-->
+    <!--});-->
+    <!--dns.resolve4("www.yingxiang.com", function(err, addresses) {-->
+        <!--console.log("wiki.corp.qunar.com 4", " use " , (new Date() - time));-->
+    <!--});-->
+<!--</script>-->
+<script src="./pages/main/autoupdate.js"></script>
 <script src="./pages/main/main.js"></script>
 </body>
 </html>

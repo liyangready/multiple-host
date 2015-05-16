@@ -10,7 +10,8 @@ var dns = require('dns');
 
 var CONFIG = {
     "hostFilePath": null,
-    "chromePath": null
+    "chromePath": null,
+    "systemHostFilePath": "C:\\Windows\\System32\\drivers\\etc\\hosts"
 }
 
 function setConfig(name, value) {
@@ -25,13 +26,18 @@ function startNode() {
         port: 9393,
         onBeforeRequest: function(req) {
             try {
+
                 var host = findHost(CONFIG.hostFilePath, req.host);
-                //dnsTest(req.host);
+                var sysTemHost = findHost(CONFIG.systemHostFilePath, req.host);
 
                 if (host) {
                     logHost(req.host, host, "被代理到：");
                     req.host = host;
                     req.replace = true;
+                }
+                if (sysTemHost && !host) {
+                    req.needDnsResolve = true;
+                    logHost(req.host, '', "检测到系统hosts并且被忽略", "warn");
                 }
             }
             catch(e) {
@@ -51,12 +57,12 @@ function startNode() {
 var _cache = {};
 function logHost( adress, ip, text, level ) {
     level = level || "log";
-    if (!_cache[adress]) {
-        _cache[adress] = [logInfo(level, adress + text + ip), 1];
+    if (!_cache[adress + level]) {
+        _cache[adress + level] = [logInfo(level, adress + text + ip), 1];
     }
     else {
-        _cache[adress][1] += 1;
-        _cache[adress][0].innerHTML = '<i class="times">' + _cache[adress][1] + '</i>' + adress + text + ip;
+        _cache[adress + level][1] += 1;
+        _cache[adress + level][0].innerHTML = '<i class="times">' + _cache[adress + level][1] + '</i>' + adress + text + ip;
     }
 }
 
