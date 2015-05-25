@@ -4,7 +4,7 @@
     "node-main": "nodemain.js",
     "author": "leon.li@qunar.com",
     "window": {
-        "toolbar": true,
+        "toolbar": false,
         "width": 650,
         "height": 600,
         "position": "center",
@@ -20,5 +20,5 @@
     },
     "manifestUrl": "http://l-flight22.f.beta.cn0.qunar.com:3000/nw/package.json",
     "node-remote": "*",
-    "version": "0.0.1"
+    "version": "0.0.2"
 }

@@ -139,19 +139,14 @@
     </div>
 </div>
 
-<!--<script>-->
-    <!--var dns = require("dns");-->
-    <!--var time = new Date();-->
-    <!--dns.lookup("www.yingxiang.com", function(err, addresses) {-->
-        <!--console.log("wiki.corp.qunar.com 1", " use " , (new Date() - time));-->
-    <!--});-->
-    <!--dns.resolve("www.yingxiang.com", function(err, addresses) {-->
-        <!--console.log("wiki.corp.qunar.com 2", " use " , (new Date() - time));-->
-    <!--});-->
-    <!--dns.resolve4("www.yingxiang.com", function(err, addresses) {-->
-        <!--console.log("wiki.corp.qunar.com 4", " use " , (new Date() - time));-->
-    <!--});-->
-<!--</script>-->
+<script>
+    var dns = require("dns");
+    var time = new Date();
+    dns.resolve( "www.baidu.com", function(err, addresses) {
+         console.log( "解析耗时" + (new Date() - time));
+
+     });
+</script>
 <script src="./pages/main/autoupdate.js"></script>
 <script src="./pages/main/main.js"></script>
 </body>
