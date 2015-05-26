@@ -4,7 +4,7 @@
     "node-main": "nodemain.js",
     "author": "leon.li@qunar.com",
     "window": {
-        "toolbar": false,
+        "toolbar": true,
         "width": 650,
         "height": 600,
         "position": "center",

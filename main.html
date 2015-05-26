@@ -2,104 +2,47 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>本地多hosts工具-beta</title>
-    <style>
-        body, div, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, img, form, fieldset, blockquote {
-            margin: 0; padding: 0; border: 0;
-        }
-
-        body {
-            background: #eee;
-        }
-
-        #ver {
-            background: #474747; display: table; color: #ccc;
-            text-align: right;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        #inset {
-            width: 100%; height: 100%;
-            background: #474747;
-            display: table;
-            color: #fff;
-        }
-
-        #inset h1 {
-            text-align: center;
-            /*vertical-align: middle;*/
-            font-family: "League-Gothic", Courier;
-            font-size: 50px;
-            text-transform: uppercase;
-            text-shadow: 0px 2px 3px #222;
-
-        }
-        .buttons {
-            /*position: absolute;*/
-            /*right: 30px;*/
-            /*top: 100px;*/
-            /*width: 150px;*/
-            height: 50px;
-            margin-top: 20px;;
-            text-align: center;
-        }
-        #open_btn {
-            width: 120px;
-            height: 40px;
-            border-radius: 5px;
-            border: 1px solid gray;
-            color: #fff;
-            background-color: rgb(36, 174, 111);
-            cursor: pointer;
-            outline: none;
-        }
-        .shimmer {
-            text-align: center;
-            color: rgba(55,55,55,0.1);
-            background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
-            -webkit-background-size: 125px 100%;
-            -webkit-background-clip: text;
-            -webkit-animation-name: shimmer;
-            -webkit-animation-duration: 10s;
-            -webkit-animation-iteration-count: infinite;
-            background-repeat: no-repeat;
-            background-position: 0 0;
-            background-color: #222;
-        }
-
-        @-webkit-keyframes shimmer {
-            0% {
-                background-position: top left;
-            }
-            20% {
-                background-position: top right;
-            }
-            100% {
-                background-position: top right;
-            }
-        }
-        .configArea { margin-left: 20px; }
-        .configArea .config-text { }
-        .config-item { margin-top:20px; display: flex;flex-flow: row; font-size: 14px; }
-        .config-item .label{ flex: 1; }
-        .config-item .item { flex: 3; cursor: pointer; }
-        .config-item .item .path-text{ text-decoration: underline; cursor: pointer; color: #60C7AB; }
-        .logArea { margin: 20px;}
-        .logArea .logWrapper { height: 200px; background-color: #808080; overflow: auto;  font-size: 14px; padding-left: 20px; margin-top: 30px; }
-        .logArea .logWrapper p { height: 20px; line-height: 20px; }
-        .logArea .logWrapper .log { color: #fff; }
-        .logArea .logWrapper .warn { color: yellow ; }
-        .logArea .logWrapper .error { color: red ;  }
-        .logArea .logWrapper .times { display: inline-block; padding:1px 2px; height: 15px; line-height: 15px; background-color: rgb(87, 198, 234); border: 1px; border-radius: 5px; text-align: center; margin-right: 5px; }
-        .version{ text-align: right; padding-right: 20px; color: #CCC; font-size: 12px; }
-        .mask { position: fixed; width: 100%; height: 100%; z-index: 999; background-color: #000; opacity: 0.5; top: 0; left: 0; }
-        .loading { position: fixed; width: 160px; height: 160px; margin-left: -80px; margin-top: -80px; z-index: 1000; color: #fff; top: 50%; left: 50%; }
-        .loading .loaded{ font-size: 40px; margin-top: 10px; text-align: center; }
-    </style>
+    <link rel="stylesheet" href="./pages/main/main.css"/>
 </head>
 <body onload="process.mainModule.exports.start()">
-<div id="inset">
+<header class="m-title">
+    <h1 class="name shimmer">Multiple-Host</h1>
+    <span class="detail">本地多host环境</span>
+</header>
+<div class="m-wrapper">
+    <nav class="m-menu">
+        <a href="#pages/start" class="item">开始使用</a>
+        <a href="#pages/log" class="item">日志输出</a>
+        <a href="#pages/host" class="item">代理host</a>
+        <a href="#pages/settings" class="item">设    置</a>
+    </nav>
+    <section class="m-content">
+        <div class="start-content js-content js-start" style="display: none;">
+            <section class="browser-list">
+                <div class="browser choosed">chrome</div>
+                <div class="browser">firefox</div>
+                <div class="browser">ie</div>
+            </section>
+            <section class="detail js-chrome">
+                <div class="info">
+                    <h3>使用说明：</h3>
+                    <p>1 被唤起的浏览器将会忽略系统host配置，使用<a href="#pages/host">代理host</a>，从而实现多浏览器不同host的效果。</p>
+                    <p>2 被唤起的chrome没有用户和插件，默认打开一篇wiki，你可以以此作为标志来区分当前使用的是否为代理浏览器。</p>
+                </div>
+                <div class="operate">
+                    <button id="open_btn">唤起代理chrome</button>
+                </div>
+            </section>
+            <section class="detail js-firefox" style="display: none;">暂未支持</section>
+            <section class="detail js-ie" style="display: none;">暂未支持</section>
+        </div>
+        <div class="log-content js-content js-log" style="display: none;">log</div>
+        <div class="host-content js-content js-host" style="display: none;">host</div>
+        <div class="settings-content js-content js-settings" style="display: none;">settings</div>
+    </section>
+</div>
+
+<div id="inset" style="display: none;">
     <h1 class="shimmer">NW.js</h1>
     <div class="configArea">
         <h2 class="config-text">配置项</h2>
@@ -124,10 +67,11 @@
         <h2 class="config-text">日志</h2>
         <div class="logWrapper" id="log_area"></div>
     </div>
-    <div class="buttons">
-        <button id="open_btn">唤起代理chrome</button>
-    </div>
-    <div class="version" id="version"></div>
+    <!--<div class="buttons">-->
+        <!--<button id="open_btn">唤起代理chrome</button>-->
+    <!--</div>-->
+    <div class="version" ></div>
+    <span class="version" id="version"></span>
 
 
 </div>
@@ -139,14 +83,10 @@
     </div>
 </div>
 
-<script>
-    var dns = require("dns");
-    var time = new Date();
-    dns.resolve( "www.baidu.com", function(err, addresses) {
-         console.log( "解析耗时" + (new Date() - time));
-
-     });
-</script>
+<script src="./lib/underscore.js"></script>
+<script src="./lib/jquery-2.1.4.js"></script>
+<script src="./lib/backbone.js"></script>
+<script src="./pages/main/controller.js"></script>
 <script src="./pages/main/autoupdate.js"></script>
 <script src="./pages/main/main.js"></script>
 </body>
