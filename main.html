@@ -19,11 +19,11 @@
     <section class="m-content">
         <div class="start-content js-content js-start" style="display: none;">
             <section class="browser-list">
-                <div class="browser choosed">chrome</div>
-                <div class="browser">firefox</div>
-                <div class="browser">ie</div>
+                <div class="browser js-browser choosed">chrome</div>
+                <div class="browser js-browser">firefox</div>
+                <div class="browser js-browser">ie</div>
             </section>
-            <section class="detail js-chrome">
+            <section class="detail js-detail js-chrome">
                 <div class="info">
                     <h3>使用说明：</h3>
                     <p>1 被唤起的浏览器将会忽略系统host配置，使用<a href="#pages/host">代理host</a>，从而实现多浏览器不同host的效果。</p>
@@ -33,13 +33,41 @@
                     <button id="open_btn">唤起代理chrome</button>
                 </div>
             </section>
-            <section class="detail js-firefox" style="display: none;">暂未支持</section>
-            <section class="detail js-ie" style="display: none;">暂未支持</section>
+            <section class="detail js-detail js-firefox" style="display: none;">暂未支持</section>
+            <section class="detail js-detail js-ie" style="display: none;">暂未支持</section>
         </div>
-        <div class="log-content js-content js-log" style="display: none;">log</div>
-        <div class="host-content js-content js-host" style="display: none;">host</div>
-        <div class="settings-content js-content js-settings" style="display: none;">settings</div>
+        <div class="log-content js-content js-log" style="display: none;">
+        </div>
+        <div class="host-content js-content js-host" style="display: none;">
+            <iframe class="hostManager" src="./hostManager/index.html" frameborder="0"></iframe>
+        </div>
+        <div class="settings-content js-content js-settings" style="display: none;">
+            <ul class="setting-list">
+
+                <li class="item port">
+                    <span class="name">端口号(重启生效):</span>
+                    <span class="value">
+                        <input name="serverPort" type="text" value="9393"/>
+                    </span>
+                </li>
+                <li class="item chrome-path">
+                    <span class="name">chrome启动路径:</span>
+                    <span class="value">
+                        <input id="showPath" class="text" value="" type="text"/>
+                        <label for="chrome_file"  class="change-btn">更改</label>
+                        <input name="chromePath" type="file" style="display: none;" id="chrome_file" />
+                    </span>
+
+                </li>
+
+            </ul>
+            <div class="setting-save">
+                <button class="sure" id="saveBtn">保存</button>
+            </div>
+
+        </div>
     </section>
+    <div class="popup-success" style="display: none;">Success</div>
 </div>
 
 <div id="inset" style="display: none;">
@@ -86,6 +114,8 @@
 <script src="./lib/underscore.js"></script>
 <script src="./lib/jquery-2.1.4.js"></script>
 <script src="./lib/backbone.js"></script>
+<script src="./pages/main/logger.js"></script>
+
 <script src="./pages/main/controller.js"></script>
 <script src="./pages/main/autoupdate.js"></script>
 <script src="./pages/main/main.js"></script>

@@ -1,0 +1,109 @@
+{"appDesc": {
+    "message": "A Chrome extension to manage your hosts file."
+}, "appName": {
+    "message": "Hosts Manager"
+}, "addLine": {
+    "message": "add entry to this group"
+}, "editGroup": {
+    "message": "edit group name"
+}, "removeGroup": {
+    "message": "remove this group"
+}, "checkGroup": {
+    "message": "enable/disable this group"
+}, "checkLine": {
+    "message": "enable/disable this entry"
+}, "editLine": {
+    "message": "edit this entry"
+}, "removeLine": {
+    "message": "remove this entry"
+}, "hostsPath": {
+    "message": "Path to your hosts file:"
+}, "addGroup": {
+    "message": "create a new group"
+}, "hostsRefresh":{
+    "message": "reload from hosts"
+},"refresh": {
+    "message": "reload the entries from the localStorage"
+}, "backup": {
+    "message": "take a backup"
+}, "current": {
+    "message": "show entries of current url"
+}, "link": {
+    "message": "open the hosts file"
+}, "fileNotExist": {
+    "message": "File does not exist!"
+}, "noDirectory": {
+    "message": "Specify a file instead of directory!"
+}, "overwrite": {
+    "message": "Do you want to overwrite the existing file?"
+}, "cantReadFile": {
+    "message": "Can not read file."
+}, "cantWriteFile": {
+    "message": "Can not write file."
+}, "blankPath": {
+    "message": "Path can not be blank!"
+}, "unknownChar": {
+    "message": "The contents of the file contains non-utf8 characters!"
+}, "loadSuccess": {
+    "message": "File successfully loaded!"
+}, "saveSuccess": {
+    "message": "File successfully saved!"
+}, "duplicates": {
+    "message": "Can not do batch enable for duplicates found in the group."
+}, "olGroup": {
+    "message": "Group Name"
+}, "olSave": {
+    "message": "Save"
+}, "olAddr": {
+    "message": "IP address"
+}, "olHost": {
+    "message": "Hostname"
+}, "olComment": {
+    "message": "Comment"
+}, "olCancel": {
+    "message": "Cancel"
+}, "fieldError": {
+    "message": "Incorrect format"
+}, "backupPath": {
+    "message": "Path of backup file"
+}, "defaultGroup": {
+    "message": "DEFAULT"
+}, "newGroup": {
+    "message": "NEW_GROUP"
+}, "allProjects": {
+    "message": "All projects"
+}, "currentTabIP": {
+    "message": "IP address of current tab: "
+}, "clickToHide": {
+    "message": "Click to hide me"
+}, "import": {
+    "message": "import"
+}, "importGroup": {
+    "message": "import to group"
+}, "changeMethod": {
+    "message": "Policy"
+}, "useProxy": {
+    "message": "Use proxy to take effect (Will affect a number of proxy software, such as Fiddler,Proxy Switchy!)."
+}, "clearCache": {
+    "message": "Clear cache to take effect (Need run Chrome with --enable-benchmarking flag)."
+}, "nothing": {
+    "message": "Waiting to take effect (You can checkon the \"Disable cache\" option at Settings pannel)."
+}, "showIP": {
+    "message": "Show IP address of current page."
+}, "groupFilter": {
+    "message": "Change group name to \"environment==@project\" to apply group filter"
+}, "newVersion": {
+    "message": "Get the latest version"
+}, "newVersionUrl": {
+    "message": "https://chrome.google.com/webstore/detail/hosts-manager/kpfmckjjpabojdhlncnccfhkfhbmnjfi"
+}, "groupNameTpl": {
+    "message": "environment==@project"
+}, "clearProxy": {
+    "message": "Clear Proxy Cache"
+}, "writeStorage": {
+    "message": "Save to chrome storage while failed to write local file (Must enable proxy)"
+}, "clearStorage": {
+    "message": "Clear Local Storage"
+}, "copyMe": {
+    "message": "Copy the content below"
+}}

@@ -29,6 +29,21 @@ body {
   left: 0;
   bottom: 0;
   width: 100%; }
+  .m-wrapper .popup-success {
+    z-index: 999;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    margin-left: -75px;
+    margin-top: -25px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #b2f7a1;
+    color: #57a743;
+    border-radius: 3px;
+    font-size: 23px; }
   .m-wrapper .m-menu {
     flex: 1;
     background-color: #272727; }
@@ -46,13 +61,13 @@ body {
     color: #544c47;
     background-color: #eee;
     position: relative; }
-    .m-wrapper .m-content .browser-list {
+    .m-wrapper .m-content .start-content .browser-list {
       position: absolute;
       bottom: 0;
       width: 100%;
       height: 30px;
       border-top: 1px solid #CAC6C6; }
-      .m-wrapper .m-content .browser-list .browser {
+      .m-wrapper .m-content .start-content .browser-list .browser {
         float: left;
         width: 80px;
         text-align: center;
@@ -60,26 +75,26 @@ body {
         line-height: 18px;
         cursor: pointer;
         margin: 5px; }
-      .m-wrapper .m-content .browser-list .choosed {
+      .m-wrapper .m-content .start-content .browser-list .choosed {
         color: #fff;
         background-color: #e97c5f;
         border-radius: 5px; }
-    .m-wrapper .m-content .detail .info {
+    .m-wrapper .m-content .start-content .detail .info {
       background: #F2F2F2;
       line-height: 20px;
       padding: 20px;
       margin: 20px;
       border: 1px dotted #666;
       border-radius: 5px; }
-    .m-wrapper .m-content .detail .info p {
+    .m-wrapper .m-content .start-content .detail .info p {
       font-size: 12px;
       margin: 10px 0;
       color: #807474; }
-    .m-wrapper .m-content .detail .operate {
+    .m-wrapper .m-content .start-content .detail .operate {
       height: 50px;
       margin-top: 20px;
       text-align: center; }
-      .m-wrapper .m-content .detail .operate #open_btn {
+      .m-wrapper .m-content .start-content .detail .operate #open_btn {
         width: 120px;
         height: 40px;
         border-radius: 5px;
@@ -88,6 +103,94 @@ body {
         background-color: #24ae6f;
         cursor: pointer;
         outline: none; }
+    .m-wrapper .m-content .host-content .hostManager {
+      width: 100%;
+      height: 100%; }
+    .m-wrapper .m-content .settings-content .setting-list {
+      list-style: none;
+      padding: 20px;
+      margin: 20px; }
+      .m-wrapper .m-content .settings-content .setting-list .item {
+        margin: 10 0px;
+        font-size: 12px;
+        height: 25px; }
+        .m-wrapper .m-content .settings-content .setting-list .item .name {
+          float: left;
+          height: 20px;
+          line-height: 20px;
+          width: 100px; }
+        .m-wrapper .m-content .settings-content .setting-list .item .value {
+          float: left;
+          height: 20px;
+          line-height: 20px; }
+      .m-wrapper .m-content .settings-content .setting-list .port input {
+        width: 60px;
+        text-align: center;
+        border: 1px solid #C3C3C3;
+        border-radius: 3px; }
+      .m-wrapper .m-content .settings-content .setting-list .chrome-path .text {
+        height: 25px;
+        padding: 0 3px;
+        width: 200px;
+        display: inline-block;
+        border: 1px solid #C3C3C3;
+        background-color: #fff;
+        border-radius: 3px;
+        color: #2A2A2A;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap; }
+      .m-wrapper .m-content .settings-content .setting-list .chrome-path .change-btn {
+        margin-left: 3px;
+        display: inline-block;
+        width: 45px;
+        height: 20px;
+        border-radius: 5px;
+        background-color: #CAC7C7;
+        cursor: pointer;
+        text-align: center; }
+    .m-wrapper .m-content .setting-save {
+      padding: 0 30px;
+      text-align: center;
+      position: relative; }
+      .m-wrapper .m-content .setting-save .sure {
+        width: 81px;
+        height: 33px;
+        border: none;
+        border-radius: 6px;
+        background: #E86A6A;
+        color: #fff;
+        cursor: pointer;
+        outline: none; }
+      .m-wrapper .m-content .setting-save .sure:hover {
+        background: #FF8585; }
+    .m-wrapper .m-content .log-content .log-times {
+      display: inline-block;
+      padding: 1px 2px;
+      height: 15px;
+      line-height: 15px;
+      background-color: #57c6ea;
+      border: 1px;
+      border-radius: 5px;
+      text-align: center;
+      margin-right: 5px; }
+    .m-wrapper .m-content .log-content .logItem {
+      padding: 5px 0;
+      margin: 5px 20px;
+      border-bottom: 1px solid #ccc;
+      height: 25px;
+      line-height: 25px; }
+    .m-wrapper .m-content .log-content .logTime {
+      float: right;
+      font-style: italic;
+      font-size: 12px;
+      color: #888; }
+    .m-wrapper .m-content .log-content .log {
+      color: #555; }
+    .m-wrapper .m-content .log-content .warn {
+      cloro: yellow; }
+    .m-wrapper .m-content .log-content .error {
+      color: red; }
 
 #inset {
   width: 100%;

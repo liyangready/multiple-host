@@ -15,31 +15,31 @@ var chromeLabel = document.getElementById("chrome_file_label");
 
 
 //init
-hostLabel.innerHTML = hostBtn.defaultValue = localStorage.getItem("hostFilePath") || defaultHost;
-chromeLabel.innerHTML  = chromeFile.defaultValue = localStorage.getItem("chromePath") || detaultChrome;
+//hostLabel.innerHTML = hostBtn.defaultValue = localStorage.getItem("hostFilePath") || defaultHost;
+//chromeLabel.innerHTML  = chromeFile.defaultValue = localStorage.getItem("chromePath") || detaultChrome;
 //hostLabel.innerHTML = hostBtn.defaultValue || "未选择";
 //chromeLabel.innerHTML = chromePath.defaultValue || "未选择";
 
-process.mainModule.exports.setConfig("hostFilePath", hostBtn.defaultValue);
-process.mainModule.exports.setConfig("chromePath", chromeFile.defaultValue);
+//process.mainModule.exports.setConfig("hostFilePath", hostBtn.defaultValue);
+//process.mainModule.exports.setConfig("chromePath", chromeFile.defaultValue);
 //init
-hostBtn.addEventListener("change", function(event) {
-    if (!event.target.value) {
-        return;
-    }
-    localStorage.setItem("hostFilePath", event.target.value);
-    process.mainModule.exports.setConfig("hostFilePath", event.target.value);
-    hostLabel.innerHTML =  event.target.value;
-}, false);
+//hostBtn.addEventListener("change", function(event) {
+//    if (!event.target.value) {
+//        return;
+//    }
+//    localStorage.setItem("hostFilePath", event.target.value);
+//    process.mainModule.exports.setConfig("hostFilePath", event.target.value);
+//    hostLabel.innerHTML =  event.target.value;
+//}, false);
 
-chromeFile.addEventListener("change", function(event) {
-    if (!event.target.value) {
-        return;
-    }
-    localStorage.setItem("chromePath", event.target.value);
-    process.mainModule.exports.setConfig("chromePath", event.target.value);
-    chromeLabel.innerHTML = event.target.value;
-}, false);
+//chromeFile.addEventListener("change", function(event) {
+//    if (!event.target.value) {
+//        return;
+//    }
+//    localStorage.setItem("chromePath", event.target.value);
+//    process.mainModule.exports.setConfig("chromePath", event.target.value);
+//    chromeLabel.innerHTML = event.target.value;
+//}, false);
 
 
 
@@ -51,7 +51,7 @@ btn.addEventListener("click", function(event) {
     try {
         var command;
 
-        var chromePath = chromeLabel.innerHTML;
+        var chromePath = localStorage.getItem("chromePath");
         if (chromePath) {
             var arr = chromePath.split('\\');
             var exeName = arr.pop();
@@ -68,13 +68,13 @@ btn.addEventListener("click", function(event) {
         exec(command, function (error) {
 
             if (error) {
-                logInfo("log", error.message );
+                logger("log", error.message );
             }
-            first && logInfo("log", "chrome启动成功，代理端口: 9393" );
+            first && logger("log", "chrome启动成功，代理端口: 9393" );
             first = false;
         });
     } catch (err) {
-        logInfo("error", "Error while trying to start child process: " + JSON.stringify(err) );
+        logger("error", "Error while trying to start child process: " + JSON.stringify(err) );
     }
 
 }, false);
@@ -104,13 +104,4 @@ win.on('minimize', function() {
 
 });
 
-//
-function logInfo(level, text) {
-    var logWrapper = document.getElementById("log_area");
-    var p = document.createElement('p');
-    p.className = level;
-    p.innerHTML = text;
 
-    logWrapper.appendChild(p);
-    return p;
-}

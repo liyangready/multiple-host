@@ -1,0 +1,28 @@
+#chrome-hosts-manager-ipaddr {
+	display: inline-block;
+	position: fixed;
+	bottom: 15px;
+	left: 5px;
+	z-index: 2147483647;
+	width: auto;
+	height: auto;
+	margin: 0;
+	padding: 0 .5em;
+	border: none;
+	border-radius: 6px;
+	background: rgba(0, 0, 0, .35);
+	-webkit-transition: background 1s;
+	cursor: pointer;
+	line-height: 1.3em;
+	letter-spacing: normal;
+	text-align: center;
+	text-indent: 0;
+	text-decoration: none;
+	font-family: tahoma,arial;
+	font-size: 24px;
+	font-weight: bold;
+	color: #fff;
+}
+#chrome-hosts-manager-ipaddr:hover {
+	background: rgba(0, 0, 0, .7);
+}

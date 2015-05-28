@@ -35,6 +35,23 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
+  .popup-success {
+    z-index:999;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    margin-left: -75px;
+    margin-top: -25px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #b2f7a1;
+    color: #57a743;
+    border-radius: 3px;
+    font-size: 23px;
+  }
+
   .m-menu {
     flex: 1;
     background-color: #272727;
@@ -57,59 +74,164 @@ body {
     background-color: #eee;
     position: relative;
 
-    .browser-list {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 30px;
-      border-top: 1px solid #CAC6C6;
+    .start-content {
+      .browser-list {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        border-top: 1px solid #CAC6C6;
 
-      .browser {
-        float: left;
-        width: 80px;
-        text-align: center;
-        height: 18px;
-        line-height: 18px;
-        cursor: pointer;
-        margin: 5px;
-      }
-
-      .choosed {
-        color: #fff;
-        background-color: #e97c5f;
-        border-radius: 5px;
-      }
-    }
-    .detail {
-      .info {
-        background: #F2F2F2;
-        line-height: 20px;
-        padding: 20px;
-        margin: 20px;
-        border: 1px dotted #666;
-        border-radius: 5px;
-      }
-      .info p {
-        font-size: 12px;
-        margin: 10px 0;
-        color: #807474;
-      }
-      .operate {
-        height: 50px;
-        margin-top: 20px;
-        text-align: center;
-
-        #open_btn {
-          width: 120px;
-          height: 40px;
-          border-radius: 5px;
-          border: 1px solid gray;
-          color: #fff;
-          background-color: rgb(36, 174, 111);
+        .browser {
+          float: left;
+          width: 80px;
+          text-align: center;
+          height: 18px;
+          line-height: 18px;
           cursor: pointer;
-          outline: none;
+          margin: 5px;
+        }
+
+        .choosed {
+          color: #fff;
+          background-color: #e97c5f;
+          border-radius: 5px;
         }
       }
+      .detail {
+        .info {
+          background: #F2F2F2;
+          line-height: 20px;
+          padding: 20px;
+          margin: 20px;
+          border: 1px dotted #666;
+          border-radius: 5px;
+        }
+        .info p {
+          font-size: 12px;
+          margin: 10px 0;
+          color: #807474;
+        }
+        .operate {
+          height: 50px;
+          margin-top: 20px;
+          text-align: center;
+
+          #open_btn {
+            width: 120px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            color: #fff;
+            background-color: rgb(36, 174, 111);
+            cursor: pointer;
+            outline: none;
+          }
+        }
+      }
+    }
+    .host-content {
+      .hostManager {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .settings-content {
+      .setting-list {
+        list-style: none;
+        padding: 20px;
+        margin: 20px;
+
+        .item {
+          margin: 10 0px;
+          font-size: 12px;
+          height: 25px;
+          .name {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+            width: 100px;
+          }
+          .value {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+          }
+
+        }
+        .port {
+          input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #C3C3C3;
+            border-radius: 3px;
+          }
+        }
+        .chrome-path {
+          .text {
+            height: 25px;
+            padding: 0 3px;
+            width: 200px;
+            display: inline-block;
+            border: 1px solid #C3C3C3;
+            background-color: #fff;
+            border-radius: 3px;
+            color: #2A2A2A;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          .change-btn {
+            margin-left: 3px;
+            display: inline-block;
+            width: 45px;
+            height: 20px;
+            border-radius: 5px;
+            background-color: #CAC7C7;
+            cursor: pointer;
+            text-align: center;
+          }
+        }
+
+      }
+    }
+    .setting-save {
+      padding: 0 30px;
+      text-align: center;
+      position: relative;
+      .sure {
+        width: 81px;
+        height: 33px;
+        border: none;
+        border-radius: 6px;
+        background: #E86A6A;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .sure:hover {
+        background: #FF8585;
+      }
+    }
+    .log-content {
+      .log-times { display: inline-block; padding:1px 2px; height: 15px; line-height: 15px; background-color: rgb(87, 198, 234); border: 1px; border-radius: 5px; text-align: center; margin-right: 5px; }
+      .logItem {
+        padding: 5px 0;
+        margin: 5px 20px;
+        border-bottom: 1px solid #ccc;
+        height: 25px;
+        line-height: 25px;
+      }
+      .logTime {
+        float: right;
+        font-style: italic;
+        font-size: 12px;
+        color: #888;
+      }
+      .log { color: #555; }
+      .warn { cloro: yellow; }
+      .error { color: red; }
     }
   }
 }

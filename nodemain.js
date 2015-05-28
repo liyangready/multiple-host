@@ -7,11 +7,11 @@ var findHost = require("./lib/findhost.js");
 var dirname = require('./lib/util').dirname;
 var dns = require('dns');
 
-
 var CONFIG = {
     "hostFilePath": null,
     "chromePath": null,
-    "systemHostFilePath": "C:\\Windows\\System32\\drivers\\etc\\hosts"
+    "systemHostFilePath": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+    "serverPort": 9393
 }
 
 function setConfig(name, value) {
@@ -20,32 +20,35 @@ function setConfig(name, value) {
 
 
 function startNode() {
-    logInfo("log", "node代码启动成功");
+    var logger = global.window.logger;
+
+    logger("log", "node代码启动成功");
 
     var nwProxy = new easyProxy({
-        port: 9393,
+        port:  global.window.localStorage.getItem("serverPort") || 9393,
         onBeforeRequest: function(req) {
             try {
-
-                var host = findHost(CONFIG.hostFilePath, req.host);
+                var hostPath = global.window.localStorage.getItem("hostFilePath");
+                var host = findHost(hostPath, req.host);
                 var sysTemHost = findHost(CONFIG.systemHostFilePath, req.host);
 
                 if (host) {
-                    logHost(req.host, host, "被代理到：");
+                    logger("log", req.host + "被代理到：" + host);
                     req.host = host;
                     req.replace = true;
                 }
                 if (sysTemHost && !host) {
                     req.needDnsResolve = true;
-                    logHost(req.host, '', "检测到系统hosts并且被忽略", "warn");
+                    logger("warn", req.host + "检测到系统hosts并且被忽略");
+
                 }
             }
             catch(e) {
-                logInfo("error", e.message);
+                logger("error", e.message);
             }
         },
         onServerError: function(e) {
-            logInfo("error", "serverError" + e.message);
+            logger("error", "serverError" + e.message);
         },
         onRequestError: function(e) {
             console.log(e.message);

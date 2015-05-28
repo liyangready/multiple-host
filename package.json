@@ -20,5 +20,5 @@
     },
     "manifestUrl": "http://l-flight22.f.beta.cn0.qunar.com:3000/nw/package.json",
     "node-remote": "*",
-    "version": "0.0.2"
+    "version": "0.0.4"
 }
