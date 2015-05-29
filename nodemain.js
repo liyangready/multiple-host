@@ -22,7 +22,7 @@ function setConfig(name, value) {
 function startNode() {
     var logger = global.window.logger;
 
-    logger("log", "node代码启动成功");
+    logger.doLog("log", "node代码启动成功,端口：" + global.window.localStorage.getItem("serverPort") || 9393);
 
     var nwProxy = new easyProxy({
         port:  global.window.localStorage.getItem("serverPort") || 9393,
@@ -33,22 +33,22 @@ function startNode() {
                 var sysTemHost = findHost(CONFIG.systemHostFilePath, req.host);
 
                 if (host) {
-                    logger("log", req.host + "被代理到：" + host);
+                    logger.doLog("log", req.host + "被代理到：" + host);
                     req.host = host;
                     req.replace = true;
                 }
                 if (sysTemHost && !host) {
                     req.needDnsResolve = true;
-                    logger("warn", req.host + "检测到系统hosts并且被忽略");
+                    logger.doLog("warn", req.host + "检测到系统hosts并且被忽略");
 
                 }
             }
             catch(e) {
-                logger("error", e.message);
+                logger.doLog.doLog("error", e.message);
             }
         },
         onServerError: function(e) {
-            logger("error", "serverError" + e.message);
+            logger.doLog("error", "serverError" + e.message);
         },
         onRequestError: function(e) {
             console.log(e.message);

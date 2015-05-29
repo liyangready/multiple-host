@@ -7,8 +7,12 @@ var ContentModel = Backbone.Model.extend();
 var ContentView = Backbone.View.extend({
     "switchView": function() {
         var showViewClass = '.js-' + this.model.get("hashName");
+        var toClass = ".js-to-" + this.model.get("hashName");
         $(".js-content").hide();
         $(showViewClass).show();
+
+        $(".selected").removeClass("selected");
+        $(toClass).addClass("selected");
     },
     "initialize": function() {
 
@@ -83,7 +87,22 @@ var SettingsView = ContentView.extend({
         this.$el.find("#showPath").val(path);
     }
 });
-var logView = new ContentView({"model": logModel});
+var LogView = ContentView.extend({
+    "model": logModel,
+    "el": $(".js-log")[0],
+    "events": {
+        "click .js-clear-log": "clearLog",
+        "input .js-filter-log": "filterLog"
+    },
+    "clearLog": function() {
+        window.logger.clearLogger()
+    },
+    "filterLog": function(e) {
+        window.logger.filterLogger(e.target.value);
+    }
+
+})
+var logView = new LogView();
 var hostView = new ContentView({"model": hostModel});
 var settingsView = new SettingsView();
 
@@ -119,4 +138,4 @@ var router = new AppRouter();
 Backbone.history.start();
 
 router.navigate("pages/start", {trigger: true, replace: true});
-
+$(".js-to-start").addClass("selected");

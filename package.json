@@ -4,14 +4,15 @@
     "node-main": "nodemain.js",
     "author": "leon.li@qunar.com",
     "window": {
-        "toolbar": true,
-        "width": 650,
+        "width": 760,
         "height": 600,
         "position": "center",
-        "min_width": 650,
+        "min_width": 760,
         "min_height": 600,
-        "max_width": 1366,
-        "max_height": 768
+        "max_width": 760,
+        "max_height": 600,
+        "frame": false,
+        "toolbar": false
     },
     "packages": {
         "win": {

@@ -197,7 +197,7 @@ define(function (require, exports) {
         // 设置状态的初始值
         var method = BackModel.get('method'),
             openFlag = false;
-        if (chrome.benchmarking) {
+        if (chrome && chrome.benchmarking) {
             BackModel.put('benchmarking', '1');
         } else {
             BackModel.put('benchmarking', '0');

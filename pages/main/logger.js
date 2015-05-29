@@ -3,7 +3,7 @@
  */
 var _cache = {};
 
-function logger(level, text) {
+function log(level, text) {
     var window = global.window;
     var $ = window.$;
     var times, _html;
@@ -28,10 +28,34 @@ function logger(level, text) {
             node: $(_html),
             times: 1
         }
-
-        $(".js-log").append(_cache[text]["node"]);
     }
-
+    filterLogger($(".js-filter-log").val());
+    $(".js-log-area").prepend(_cache[text]["node"]);
 }
 
+function clearLogger() {
+    _cache = {};
+    $(".js-log-area").html('');
+}
+
+function filterLogger(value) {
+    if (value == '') {
+        $(".logItem").show();
+    }
+    for (var i in _cache) {
+        var text = i;
+        if ( i.indexOf( value) < 0 ) {
+            _cache[i]["node"].hide();
+        }
+        else {
+            _cache[i]["node"].show();
+        }
+    }
+}
+
+logger = {
+    doLog: log,
+    clearLogger: clearLogger,
+    filterLogger: filterLogger
+}
 window.logger = logger;

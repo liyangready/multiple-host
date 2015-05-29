@@ -5,16 +5,22 @@
     <link rel="stylesheet" href="./pages/main/main.css"/>
 </head>
 <body onload="process.mainModule.exports.start()">
-<header class="m-title">
+<div class="m-title titlebar"  style="-webkit-app-region: drag;">
     <h1 class="name shimmer">Multiple-Host</h1>
-    <span class="detail">本地多host环境</span>
-</header>
+    <span class="detail"  >本地多host环境工具</span>
+    <div class="window-tool">
+        <span class="mini" id="minify">▬</span>
+        <span class="close" id="close">×</span>
+    </div>
+
+</div>
 <div class="m-wrapper">
     <nav class="m-menu">
-        <a href="#pages/start" class="item">开始使用</a>
-        <a href="#pages/log" class="item">日志输出</a>
-        <a href="#pages/host" class="item">代理host</a>
-        <a href="#pages/settings" class="item">设    置</a>
+        <a href="#pages/start" class="item js-to-start">开始使用</a>
+        <a href="#pages/log" class="item js-to-log">日志输出</a>
+        <a href="#pages/host" class="item js-to-host">代理host</a>
+        <a href="#pages/settings" class="item js-to-settings">设&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置</a>
+        <div class="version" id="version"></div>
     </nav>
     <section class="m-content">
         <div class="start-content js-content js-start" style="display: none;">
@@ -37,6 +43,11 @@
             <section class="detail js-detail js-ie" style="display: none;">暂未支持</section>
         </div>
         <div class="log-content js-content js-log" style="display: none;">
+            <div class="filter">
+                <input type="text" class="filter-log js-filter-log" placeholder="筛选日志"/>
+                <input type="button" class="clear-log js-clear-log" value="清空"/>
+            </div>
+            <div class="log-content js-log-area"></div>
         </div>
         <div class="host-content js-content js-host" style="display: none;">
             <iframe class="hostManager" src="./hostManager/index.html" frameborder="0"></iframe>
@@ -71,35 +82,12 @@
 </div>
 
 <div id="inset" style="display: none;">
-    <h1 class="shimmer">NW.js</h1>
-    <div class="configArea">
-        <h2 class="config-text">配置项</h2>
-        <div class="config-item">
-            <p class="label">自定义hosts文件地址：</p>
-            <div class="item">
-                <label for="host_file"  title="点击修改" class="path-text" id="host_file_label">未选择</label>
-                <input type="file" style="display: none;" id="host_file" value="D:workspace\node-webkit" />
-            </div>
-        </div>
-        <div class="config-item">
-            <p class="label">自定义chrome.exe地址：</p>
-            <div class="item">
-                <label for="chrome_file" title="点击修改" class="path-text" id="chrome_file_label">未选择</label>
-                <input type="file" style="display: none;" id="chrome_file" />
-            </div>
 
-        </div>
-    </div>
-
-    <div class="logArea">
-        <h2 class="config-text">日志</h2>
-        <div class="logWrapper" id="log_area"></div>
-    </div>
     <!--<div class="buttons">-->
         <!--<button id="open_btn">唤起代理chrome</button>-->
     <!--</div>-->
-    <div class="version" ></div>
-    <span class="version" id="version"></span>
+    <!--<div class="version" ></div>-->
+    <!--<span class="version" id="version"></span>-->
 
 
 </div>
