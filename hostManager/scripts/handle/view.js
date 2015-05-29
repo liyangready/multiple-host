@@ -302,15 +302,15 @@ define(function(require, exports) {
      * 文件拖拽上传
      */
     exports.renderDropUpload = function() {
-
         var _uploadFunc = function(resultText, dropTargetEl) {
+
             //console.log('view.js resultText : ', resultText);
             resultText = $.trim(resultText) || '';
 
             if(!resultText) {return;}
 
             var $target = $(dropTargetEl),
-                groupName = '刚刚添加的host组';
+                groupName = '新的host组';
 
             //判断是否在组内拖拽,如果是,则取组名
             if($target.length) {
@@ -328,12 +328,12 @@ define(function(require, exports) {
             exports.refresh(false);
         };
 
-//        $.each(['content'], function(i, v){
-//            new Drop({
-//                elId : v,
-//                uploadFunc : _uploadFunc
-//            });
-//        });
+        $.each(['dragWrapper'], function(i, v){
+            new Drop({
+                elId : v,
+                uploadFunc : _uploadFunc
+            });
+        });
     };
 
 	/**

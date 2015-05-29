@@ -16,35 +16,56 @@ define(function (require, exports, module) {
     };
 
     Drop.prototype.build = function() {
-        this.$dropArea = document.getElementById(this.args.elId);
-        this.dclass = this.$dropArea.className;
+
+        this.$dropArea = $("#" + this.args.elId);
         this.filesList = [];
         this.maxFilesNum = 5;
         //256kb
-        this.maxFileSize = '262144';
-
-        this.$canvasW = document.getElementById('_d_canvas_w');
-        this.$canvas = this.$canvasW.querySelector('canvas');
-        this.context = this.$canvas.getContext('2d');
+        this.maxFileSize = '2602144';
 
         this.$dropTarget = null;
+
+
     };
 
     Drop.prototype.initHandlers = function () {
-        //鼠标进入
-        this.$dropArea.addEventListener('dragenter', this.proxy(this.handlerDragenter, this), false);
-        //鼠标移动(over)执行
-        this.$dropArea.addEventListener('dragover', this.proxy(this.handlerDragover, this), false);
-        //释放鼠标执行
-        this.$dropArea.addEventListener('drop', this.proxy(this.handlerDrop, this), false);
+        var self = this;
+        $(document).on({
+            dragleave:function(e){
+                e.preventDefault();
+                self.$dropArea.css("opacity", 1);
+            },
+            drop:function(e){
+                self.$dropArea.css("opacity", 1);
+                e.preventDefault();
+                if ($(e.target).find(self.$dropArea)) {
+                    self.handlerDrop(e);
+                }
+            },
+            dragenter:function(e){
+                self.$dropArea.css("opacity", 0.5);
+                e.preventDefault();
+                if ($(e.target).find(self.$dropArea)) {
+                    self.handlerDragenter(e);
+                }
+            },
+            dragover:function(e){
+                e.preventDefault();
+            }
+        });
+//        //鼠标进入
+//        this.$dropArea.on('dragenter', this.proxy(this.handlerDragenter, this), false);
+//        //鼠标移动(over)执行
+//        this.$dropArea.on('dragover', this.proxy(this.handlerDragover, this), false);
+//        //释放鼠标执行
+//        this.$dropArea.on('drop', this.proxy(this.handlerDrop, this), false);
     };
 
     Drop.prototype.handlerDragenter = function(e) {
+
         e.stopPropagation();
         e.preventDefault();
-        //console.log(arguments)//e
         this.$dropTarget = e.target;
-        this.$dropArea.className = this.dclass + ' hover';
     };
 
     Drop.prototype.handlerDragover = function (e) {
@@ -55,12 +76,12 @@ define(function (require, exports, module) {
     Drop.prototype.handlerDrop = function (e) {
         e.stopPropagation();
         e.preventDefault();
-        //console.log('handlerDrop : ', arguments);
-        this.$dropArea.className = this.dclass;
-        this.process(e.dataTransfer.files);
+
+        this.process(e.originalEvent.dataTransfer.files);
     };
 
     Drop.prototype.process = function (filesList) {
+
         if (!filesList || !filesList.length || this.filesList.length) {
             return;
         }
@@ -83,13 +104,11 @@ define(function (require, exports, module) {
         if(!this.filesList.length) {
             return;
         }
-        this.showCanvas();
         this.upload(this.filesList.shift());
     };
 
     Drop.prototype.updateComplete = function(result) {
         this.args.uploadFunc.call(self, result, this.$dropTarget);
-        this.filesList.length && this.uploadBegin();
     };
 
     Drop.prototype.upload = function(file) {
@@ -110,7 +129,6 @@ define(function (require, exports, module) {
         reader.onload = function() {
             //console.log('读取文件结束...');
             //console.log('上传内容为 : ', this.result);
-            self.simulateProgress();
             self.updateComplete(this.result);
         };
 

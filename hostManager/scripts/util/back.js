@@ -195,9 +195,10 @@ define(function (require, exports) {
 
     var _initWhenLoad = function (BackModel, cacheData) {
         // 设置状态的初始值
+
         var method = BackModel.get('method'),
             openFlag = false;
-        if (chrome && chrome.benchmarking) {
+        if (typeof(chrome) != "undefined" && chrome.benchmarking) {
             BackModel.put('benchmarking', '1');
         } else {
             BackModel.put('benchmarking', '0');
@@ -221,7 +222,7 @@ define(function (require, exports) {
 
         ////////////////////////////////////////////
         //速配nw
-        if (chrome && chrome.webRequest && chrome.tabs) {
+        if (typeof(chrome) != "undefined" && chrome.webRequest && chrome.tabs) {
 
             if (openFlag) {
                 chrome.tabs.create({

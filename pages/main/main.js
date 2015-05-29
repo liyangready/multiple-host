@@ -46,7 +46,20 @@ btn.addEventListener("click", function(event) {
 
 }, false);
 
-
+$(document).on({
+    dragleave:function(e){
+        e.preventDefault();
+    },
+    drop:function(e){
+        e.preventDefault();
+    },
+    dragenter:function(e){
+        e.preventDefault();
+    },
+    dragover:function(e){
+        e.preventDefault();
+    }
+});
 
 // Load native UI library
 var gui = require('nw.gui');
