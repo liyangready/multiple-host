@@ -5,9 +5,8 @@
 var exec = require('child_process').exec;
 var path = require("path");
 var execPath = path.dirname( process.execPath );
-var defaultHost = path.join(execPath , "/host.txt");
 /*选择hosts文件*/
-
+var platform = require("./lib/platform");
 
 /*唤起chrome*/
 var first = true;
@@ -15,22 +14,24 @@ var btn = document.getElementById("open_btn");
 btn.addEventListener("click", function(event) {
 
     try {
-        var command;
+        // var command;
 
-        var chromePath = localStorage.getItem("chromePath");
+        // var chromePath = localStorage.getItem("chromePath");
         var port = localStorage.getItem("serverPort") || 9393;
-        if (chromePath) {
-            var arr = chromePath.split('\\');
-            var exeName = arr.pop();
-            var devPath = path.join(execPath, "/chrome-dev");
+        // if (chromePath) {
+        //     var arr = chromePath.split('\\');
+        //     var exeName = arr.pop();
+        //     var devPath = path.join(execPath, "/chrome-dev");
 
-            chromePath = arr.join('\\');
+        //     chromePath = arr.join('\\');
 
-            command = 'start \/d "' + chromePath + '" ' + exeName + ' --proxy-server="http://127.0.0.1:' + port +'"  --user-data-dir='+ devPath +'  --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
-        }
-        else {
-            command = 'start chrome --proxy-server="http://127.0.0.1:' + port + '" --user-data-dir='+ devPath + ' --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
-        }
+        //     command = 'start \/d "' + chromePath + '" ' + exeName + ' --proxy-server="http://127.0.0.1:' + port +'"  --user-data-dir='+ devPath +'  --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
+        // }
+        // else {
+        //     command = 'start chrome --proxy-server="http://127.0.0.1:' + port + '" --user-data-dir='+ devPath + ' --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
+        // }
+        
+        var command = platform.startChromeCommand();
         console.log(command);
         exec(command, function (error) {
 

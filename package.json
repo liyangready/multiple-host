@@ -11,8 +11,8 @@
         "min_height": 600,
         "max_width": 760,
         "max_height": 600,
-        "frame": true,
-        "toolbar": true
+        "frame": false,
+        "toolbar": false
     },
     "packages": {
         "win": {

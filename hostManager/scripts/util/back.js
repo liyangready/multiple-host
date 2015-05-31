@@ -5,6 +5,11 @@
  * @type {null}
  */
 var NodeFs = null;
+var path = require("path");
+var execPath = path.dirname( process.execPath );
+
+var defaultHost = path.join(execPath , "/hosts");
+
 
 if (typeof require === 'function') {
     NodeFs = require('fs');
@@ -88,7 +93,7 @@ define(function (require, exports) {
                 }
             }
 
-            var path = BackModel.get("hostFilePath");
+            var path = BackModel.get("hostFilePath") || defaultHost;
             return path;
         },
 

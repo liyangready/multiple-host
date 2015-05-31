@@ -5,12 +5,13 @@
 var easyProxy = require("./lib/easyproxy.js");
 var findHost = require("./lib/findhost.js");
 var dirname = require('./lib/util').dirname;
+var platform = require("./lib/platform");
 var dns = require('dns');
 
 var CONFIG = {
     "hostFilePath": null,
     "chromePath": null,
-    "systemHostFilePath": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+    "systemHostFilePath": platform.systemHostFilePath,
     "serverPort": 9393
 }
 
@@ -22,7 +23,7 @@ function setConfig(name, value) {
 function startNode() {
     var logger = global.window.logger;
 
-    logger.doLog("log", "node代码启动成功,端口：" + global.window.localStorage.getItem("serverPort") || 9393);
+    logger.doLog("log", "node代码启动成功,端口：" + ( global.window.localStorage.getItem("serverPort") || 9393 ));
 
     var nwProxy = new easyProxy({
         port:  global.window.localStorage.getItem("serverPort") || 9393,
