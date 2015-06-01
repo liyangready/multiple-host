@@ -2,6 +2,7 @@
  * Created by leon.li on 2015/5/25.
  */
 var fs = require("fs");
+var platform = require("./lib/platform");
 
 var ContentModel = Backbone.Model.extend();
 var ContentView = Backbone.View.extend({
@@ -76,12 +77,13 @@ var SettingsView = ContentView.extend({
 
     },
     "changeFile": function(e) {
+        
         var $show = this.$el.find("#showPath");
         $show.val(e.target.value || "");
     },
     "render": function() {
         var port = localStorage.getItem("serverPort") || 9393;
-        var path = localStorage.getItem("chromePath") ||  "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+        var path = localStorage.getItem("chromePath") || platform.defaultChromePath;
 
         this.$el.find("[name=serverPort]").val(port);
         this.$el.find("#showPath").val(path);
