@@ -39,9 +39,8 @@ function startNode() {
                     req.replace = true;
                 }
                 if (sysTemHost && !host) {
-                    req.needDnsResolve = true;
-                    logger.doLog("warn", req.host + "检测到系统hosts并且被忽略");
 
+                    req.needDnsResolve = true;
                 }
             }
             catch(e) {
