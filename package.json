@@ -16,10 +16,13 @@
     },
     "packages": {
         "win": {
-            "url": "http://l-flight22.f.beta.cn0.qunar.com:3000/nw/updapp.zip"
+            "url": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/win/updapp.zip"
+        },
+        "mac": {
+            "url": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/mac/updapp.zip"
         }
     },
-    "manifestUrl": "http://l-flight22.f.beta.cn0.qunar.com:3000/nw/package.json",
+    "manifestUrl": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/package.json",
     "node-remote": "*",
-    "version": "0.0.4"
+    "version": "0.0.5"
 }
