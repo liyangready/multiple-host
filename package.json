@@ -4,21 +4,25 @@
     "node-main": "nodemain.js",
     "author": "leon.li@qunar.com",
     "window": {
-        "toolbar": false,
-        "width": 650,
+        "width": 760,
         "height": 600,
         "position": "center",
-        "min_width": 650,
+        "min_width": 760,
         "min_height": 600,
-        "max_width": 1366,
-        "max_height": 768
+        "max_width": 760,
+        "max_height": 600,
+        "frame": true,
+        "toolbar": true
     },
     "packages": {
         "win": {
-            "url": "http://l-flight22.f.beta.cn0.qunar.com:3000/nw/updapp.zip"
+            "url": "http://127.0.0.1:3000/nw/win/updapp.zip"
+        },
+        "mac": {
+            "url": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/mac/updapp.zip"
         }
     },
-    "manifestUrl": "http://l-flight22.f.beta.cn0.qunar.com:3000/nw/package.json",
+    "manifestUrl": "http://127.0.0.1:3000/nw/package.json",
     "node-remote": "*",
-    "version": "0.0.3"
+    "version": "0.0.4"
 }

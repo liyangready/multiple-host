@@ -1,0 +1,7 @@
+{
+    "HostsAddr" : {
+        "windows": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+        "mac": "/private/etc/hosts",
+        "others": "'/etc/hosts'"
+    }
+}

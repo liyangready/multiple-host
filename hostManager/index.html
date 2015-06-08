@@ -1,0 +1,150 @@
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="./styles/popup.css"/>
+
+    <!--顶部内容:包含版本号,hosts文件路径,各种相关增删改查操作按钮-->
+    <script type="text/template" id="headTemp">
+        <!--<div class="version selectable"><b>{{:appName}}</b> v{{version}}</div>-->
+        <div class="panel">
+            <span class="hosts-path">{{:hostsPath}}</span>
+
+            <span><input id="hostsPath" class="hosts-editor" value="{{hostsPath}}"/></span>
+
+            <span class="choose-path"><label for="hostsToUpload">更改</label><input type="file" name="hostsToUpload" id="hostsToUpload" style="display: none;"/></span>
+
+            <!--bind.js中绑定点击,点击后调用view.js中同名exports方法-->
+            <!--<span class="icon fade link" data-title="{{:link}}" data-handle="link"></span>-->
+            <!--<span class="icon fade refresh" data-title="{{:refresh}}" data-handle="storageRefresh"></span>-->
+            <span class="icon fade refresh" data-title="{{:hostsRefresh}}" data-handle="hostsRefresh"></span>
+            <span class="icon fade import" data-title="{{:import}}" data-handle="imports"></span>
+            <!--<span class="icon fade save" data-title="{{:backup}}" data-handle="backup"></span>-->
+            <span class="icon fade add" data-title="{{:addGroup}}" data-handle="addGroup"></span>
+            <span class="icon fade show" data-title="{{:current}}" data-handle="current"></span>
+        </div>
+    </script>
+
+    <!--分组的包含组名的那部分内容-->
+    <script type="text/template" id="groupTemp">
+        <div class="group node clearfix">
+            <div class="name">
+                <span class="icon {{enable?checkon:checkoff}}" data-title="{{:checkGroup}}" data-handle="check"></span>
+                <span class="selectable" data-title="{{line}}">{{line}}</span>
+            </div>
+            <div class="ctrl">
+                <span class="icon fade add" data-title="{{:addLine}}" data-handle="addLine"></span>
+                <span class="icon fade edit" data-title="{{:editGroup}}" data-handle="edit"></span>
+                <span class="icon fade import" data-title="{{:importGroup}}" data-handle="imports"></span>
+                <span class="icon fade remove" data-title="{{:removeGroup}}" data-handle="remove"></span>
+                <span class="icon {{hide?expand:collapse}}" data-handle="expand"></span>
+            </div>
+        </div>
+    </script>
+
+    <!--组内单个条目-->
+    <script type="text/template" id="lineTemp">
+        <li class="line node clearfix">
+            <div class="ip">
+                <span class="icon {{enable?checkon:checkoff}}" data-title="{{:checkLine}}" data-handle="check"></span>
+                <span class="selectable" data-title="{{addr}}">{{addr}}</span>
+            </div>
+            <div class="domain selectable">
+                <span data-title="{{hostname}}">{{hostname}}</span>
+                <span class="comment" data-title="{{comment}}">{{comment}}</span>
+            </div>
+            <div class="ctrl">
+                <span class="icon fade edit" data-title="{{:editLine}}" data-handle="edit"></span>
+                <span class="icon fade remove" data-title="{{:removeLine}}" data-handle="remove"></span>
+            </div>
+        </li>
+    </script>
+
+    <!--漂浮窗,例如导入窗口等,包含操作按钮-->
+    <script type="text/template" id="olTemp">
+        <table>
+            <tr>
+                <th colspan="2">{{title}}</th>
+            </tr>
+            {{fields}}
+            <tr>
+                <td colspan="2" align="center">
+                    <span class="ol-save" data-handle="olSave">{{:olSave}}</span>
+                    <span class="ol-cancel" data-handle="olCancel">{{:olCancel}}</span>
+                </td>
+            </tr>
+        </table>
+    </script>
+
+    <script type="text/template" id="fieldTemp">
+        <tr>
+            <td align="right">
+                <label for="olEditor-{{name}}">{{label}}</label>
+            </td>
+            <td>
+                <input id="olEditor-{{name}}" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}"
+                       title="{{placeholder}}"/>
+            </td>
+        </tr>
+    </script>
+
+    <!--模板:编辑框textarea-->
+    <script type="text/template" id="areaFieldTemp">
+        <tr>
+            <td align="right">
+                <label for="olEditor-{{name}}">{{label}}</label>
+            </td>
+            <td>
+                <textarea id="olEditor-{{name}}" name="{{name}}" style="width: 500px; height: 200px;">{{value}}</textarea>
+            </td>
+        </tr>
+    </script>
+</head>
+
+<body id="dragWrapper">
+    <!--这里js动态调用模板插入-->
+    <!--插入版本号-->
+    <!--插入hosts文件地址和各种操作按钮-->
+
+    <!--容器:主要内容-->
+    <div id="content"></div>
+
+    <div style="width: 650px; height: 50px;">
+        <!--容器:组筛选-->
+        <!--<div id="groupFilter" class="groupFilter fl"></div>-->
+
+        <!--拖拽试验区域-->
+        <!--<div id="dropUploadArea" class="dropArea fl">-->
+            <!--<div id="_d_tip" class="tip">-->
+                <!--<span>把hosts文件拖拽到这里全局上传</span>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;进度条&ndash;&gt;-->
+            <!--<div class="canvasW" id="_d_canvas_w" style="display: none">-->
+                <!--<canvas id="_d_canvas" width="500" height="20" class="canvas"></canvas>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--容器:ip地址-->
+        <div id="currentIP" class="fl"></div>
+    </div>
+
+    <!--导入等弹出框-->
+    <div id="mask">
+        <div id="overlay"></div>
+    </div>
+
+    <!--提示区域-->
+    <div id="titleTip" class="hidden"></div>
+    <div id="errorTip" class="hidden"><span></span><span class="icon close" data-handle="close"></span></div>
+    <div id="infoTip" class="hidden">
+        <span></span>
+        <span class="icon confirm" data-handle="confirm"></span>
+        <span class="icon close" data-handle="close"></span>
+    </div>
+
+    <script src="./scripts/lib/jquery.js"></script>
+    <script src="./scripts/lib/sea.js" id="seajsnode" data-main="./scripts/init.js"></script>
+</body>
+</html>

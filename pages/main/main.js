@@ -5,43 +5,8 @@
 var exec = require('child_process').exec;
 var path = require("path");
 var execPath = path.dirname( process.execPath );
-var defaultHost = path.join(execPath , "/host.txt");
-var detaultChrome = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
 /*选择hosts文件*/
-var hostBtn = document.getElementById("host_file");
-var chromeFile = document.getElementById("chrome_file");
-var hostLabel = document.getElementById("host_file_label");
-var chromeLabel = document.getElementById("chrome_file_label");
-
-
-//init
-hostLabel.innerHTML = hostBtn.defaultValue = localStorage.getItem("hostFilePath") || defaultHost;
-chromeLabel.innerHTML  = chromeFile.defaultValue = localStorage.getItem("chromePath") || detaultChrome;
-//hostLabel.innerHTML = hostBtn.defaultValue || "未选择";
-//chromeLabel.innerHTML = chromePath.defaultValue || "未选择";
-
-process.mainModule.exports.setConfig("hostFilePath", hostBtn.defaultValue);
-process.mainModule.exports.setConfig("chromePath", chromeFile.defaultValue);
-//init
-hostBtn.addEventListener("change", function(event) {
-    if (!event.target.value) {
-        return;
-    }
-    localStorage.setItem("hostFilePath", event.target.value);
-    process.mainModule.exports.setConfig("hostFilePath", event.target.value);
-    hostLabel.innerHTML =  event.target.value;
-}, false);
-
-chromeFile.addEventListener("change", function(event) {
-    if (!event.target.value) {
-        return;
-    }
-    localStorage.setItem("chromePath", event.target.value);
-    process.mainModule.exports.setConfig("chromePath", event.target.value);
-    chromeLabel.innerHTML = event.target.value;
-}, false);
-
-
+var platform = require("./lib/platform");
 
 /*唤起chrome*/
 var first = true;
@@ -49,35 +14,97 @@ var btn = document.getElementById("open_btn");
 btn.addEventListener("click", function(event) {
 
     try {
-        var command;
 
-        var chromePath = chromeLabel.innerHTML;
-        if (chromePath) {
-            var arr = chromePath.split('\\');
-            var exeName = arr.pop();
-            var devPath = path.join(execPath, "/chrome-dev");
-
-            chromePath = arr.join('\\');
-
-            command = 'start \/d "' + chromePath + '" ' + exeName + ' --proxy-server="localhost:9393"  --user-data-dir='+ devPath +'  --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
-        }
-        else {
-            command = 'start chrome --proxy-server="http://127.0.0.1:9393" --user-data-dir='+ devPath + ' --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
-        }
-        console.log(command);
-        exec(command, function (error) {
-
+        var port = localStorage.getItem("serverPort") || 9393;
+        
+        platform.startChrome(function(error) {
             if (error) {
-                logInfo("log", error.message );
+                logger.doLog("log", error.message );
             }
-            first && logInfo("log", "chrome启动成功，代理端口: 9393" );
+            first && logger.doLog("log", "chrome启动成功，代理端口: " + port );
             first = false;
         });
+
+
     } catch (err) {
-        logInfo("error", "Error while trying to start child process: " + JSON.stringify(err) );
+        logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
     }
 
 }, false);
+
+/*唤起firefox*/
+var first = true;
+var btn = document.getElementById("open_firefox");
+btn.addEventListener("click", function(event) {
+
+    try {
+
+        var port = localStorage.getItem("serverPort") || 9393;
+
+        platform.startFirefox(function(error) {
+            if (error) {
+                logger.doLog("log", error.message );
+            }
+            first && logger.doLog("log", "firefox启动成功，代理端口: " + port );
+            first = false;
+        });
+
+
+    } catch (err) {
+        logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+    }
+
+}, false);
+/*唤起firefox*/
+
+/*更改系统设置*/
+var btn = document.getElementById("change_system_proxy");
+btn.addEventListener("click", function(event) {
+    var $target = $(event.target);
+    try {
+        var port = localStorage.getItem("serverPort") || 9393;
+
+        if (platform.platform == "mac") {
+            alert("mac用户请自行设置系统代理");
+        }
+        if ($target.hasClass("open_btn")) {
+            platform.setSystemProxy(function(error) {
+                if (error) {
+                    logger.doLog("log", error.message );
+                }
+                logger.doLog("log", "系统代理设置成功，代理端口: " + port );
+                $target.removeClass("open_btn").addClass("close_btn").html("关闭系统代理<br/>(重启浏览器生效)");
+            });
+        }
+        else {
+            platform.disableSystemProxy(function(error) {
+                if (error) {
+                    logger.doLog("log", error.message );
+                }
+                logger.doLog("log", "系统代理关闭成功 ");
+                $target.removeClass("close_btn").addClass("open_btn").html("打开系统代理<br/>(重启浏览器生效)");
+            });
+        }
+    } catch (err) {
+        logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+    }
+
+}, false);
+
+$(document).on({
+    dragleave:function(e){
+        e.preventDefault();
+    },
+    drop:function(e){
+        e.preventDefault();
+    },
+    dragenter:function(e){
+        e.preventDefault();
+    },
+    dragover:function(e){
+        e.preventDefault();
+    }
+});
 
 // Load native UI library
 var gui = require('nw.gui');
@@ -99,18 +126,15 @@ win.on('minimize', function() {
 
     tray.on("click", function() {
         win.show();
-        win.resizeTo(650,500);
+        win.resizeTo(760,600);
     })
 
 });
 
-//
-function logInfo(level, text) {
-    var logWrapper = document.getElementById("log_area");
-    var p = document.createElement('p');
-    p.className = level;
-    p.innerHTML = text;
+$("#minify").on("click", function(e) {
+    win.minimize();
+});
+$("#close").on("click", function(e) {
+    win.close();
+});
 
-    logWrapper.appendChild(p);
-    return p;
-}

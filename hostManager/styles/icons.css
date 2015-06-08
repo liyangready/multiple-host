@@ -1,0 +1,110 @@
+.icon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url("../images/sprites.png") no-repeat;
+	cursor: pointer;
+	vertical-align: top;
+}
+.checkon {
+	background-position: 0 0;
+}
+.checkoff {
+	background-position: -16px 0;
+}
+.group .checkon {
+	background-position: 0 -16px;
+}
+.group .checkoff {
+	background-position: -16px -16px;
+}
+.add {
+	background-position: 0 -32px;
+}
+.add:hover {
+	background-position: -16px -32px;
+}
+.save {
+	background-position: 0 -48px;
+}
+.save:hover {
+	background-position: -16px -48px;
+}
+.refresh {
+	background-position: 0 -64px;
+}
+.refresh:hover {
+	background-position: -16px -64px;
+}
+.edit {
+	background-position: 0 -80px;
+}
+.edit:hover {
+	background-position: -16px -80px;
+}
+.remove {
+	background-position: 0 -96px;
+}
+.remove:hover {
+	background-position: -16px -96px;
+}
+.show {
+	background-position: 0 -112px;
+}
+.show:hover {
+	background-position: -16px -112px;
+}
+.collapse {
+	background-position: 0 -128px;
+}
+.collapse:hover {
+	background-position: -16px -128px;
+}
+.expand {
+	background-position: 0 -144px;
+}
+.expand:hover {
+	background-position: -16px -144px;
+}
+.line:hover .edit {
+	background-position: 0 -160px;
+}
+.line:hover .edit:hover {
+	background-position: -16px -160px;
+}
+.line:hover .remove {
+	background-position: 0 -176px;
+}
+.line:hover .remove:hover {
+	background-position: -16px -176px;
+}
+.link {
+	background-position: 0 -192px;
+}
+.link:hover {
+	background-position: -16px -192px;
+}
+.close {
+	background-position: 0 -208px;
+}
+.close:hover {
+	background-position: -16px -208px;
+}
+#infoTip .close {
+	background-position: 0 -224px;
+}
+#infoTip .close:hover {
+	background-position: -16px -224px;
+}
+#infoTip .confirm {
+	background-position: 0 -240px;
+}
+#infoTip .confirm:hover {
+	background-position: -16px -240px;
+}
+.import {
+	background-position: 0 -256px;
+}
+.import:hover {
+	background-position: -16px -256px;
+}

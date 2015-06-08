@@ -26,26 +26,33 @@ var tryingForNewVersion = false;
 
 //for test purposes
 
-
-if(!copyPath){
-    request.get(url.resolve(pkg.manifestUrl, '/version/'+ pkg.version));
-    document.getElementById('version').innerHTML = '当前版本 ' + pkg.version;
-    if(!d) {
-        upd.checkNewVersion(versionChecked);
-    }
-} else {
-    document.getElementById('version').innerHTML = '已打开最新版本';
-    upd.install(copyPath, newAppInstalled);
-
-    function newAppInstalled(err){
-        if(err){
-            console.log(err);
-            return;
+    if(!copyPath){
+        request.get(url.resolve(pkg.manifestUrl, '/version/'+ pkg.version));
+        document.getElementById('version').innerHTML = '当前版本 ' + pkg.version;
+        if(!d) {
+            upd.checkNewVersion(versionChecked);
         }
-        upd.run(execPath, null);
-        gui.App.quit();
+    } else {
+        document.getElementById('version').innerHTML = '已打开最新版本';
+        //copy hosts file
+        var hostFilePath = localStorage.getItem("hostFilePath");
+        var hostContent = hostFilePath && fs.readFileSync(hostFilePath);
+        upd.install(copyPath, newAppInstalled);
+
+        function newAppInstalled(err){
+            if(err){
+                console.log(err);
+                return;
+            }
+            if (hostContent && hostFilePath) {
+                fs.writeFileSync(hostFilePath, hostContent);
+            }
+            //upd.run(execPath, null);
+            //gui.App.quit();
+        }
     }
-}
+
+
 function versionChecked(err, newVersionExists, manifest){
 
     if(err){
@@ -60,23 +67,26 @@ function versionChecked(err, newVersionExists, manifest){
         console.log('No new version exists');
         return;
     }
+    setTimeout(function() {
+        //mac如果同步有秒退现象
+        var rt = confirm("检测到有新版本,是否更新?");
 
-    var rt = confirm("检测到有新版本,是否更新?");
+        if (!rt) {
+            return;
+        }
+        document.getElementById("loading_wrapper").style.display = "block";
 
-    if (!rt) {
-        return;
-    }
-    document.getElementById("loading_wrapper").style.display = "block";
+        var loaded = 0;
+        var newVersion = upd.download(function(error, filename){
+            d = true;
+            newVersionDownloaded(error, filename, manifest);
+        }, manifest);
+        newVersion.on('data', function(chunk){
+            loaded+=chunk.length;
+            document.getElementById('loaded').innerHTML = Math.floor(loaded / newVersion['content-length'] * 100) + '%';
+        })
+    }, 1000);
 
-    var loaded = 0;
-    var newVersion = upd.download(function(error, filename){
-        d = true;
-        newVersionDownloaded(error, filename, manifest);
-    }, manifest);
-    newVersion.on('data', function(chunk){
-        loaded+=chunk.length;
-        document.getElementById('loaded').innerHTML = Math.floor(loaded / newVersion['content-length'] * 100) + '%';
-    })
 }
 function newVersionDownloaded(err, filename, manifest){
 
