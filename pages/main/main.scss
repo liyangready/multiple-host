@@ -35,6 +35,7 @@ body {
     font-size: 12px;
     padding: 5px 20px;
     color: #CCC;
+
   }
 
   .mini, .close {
@@ -163,6 +164,7 @@ body {
           border-radius: 5px;
         }
       }
+
       .detail {
         .info {
           background: #F2F2F2;
@@ -171,6 +173,10 @@ body {
           margin: 20px;
           border: 1px dotted #666;
           border-radius: 5px;
+          .warn {
+            color: #000;
+            font-weight: bold;
+          }
         }
         .info p {
           font-size: 12px;
@@ -182,7 +188,7 @@ body {
           margin-top: 20px;
           text-align: center;
 
-          #open_btn {
+          .open_btn,.close_btn{
             width: 120px;
             height: 40px;
             border-radius: 5px;
@@ -191,6 +197,17 @@ body {
             background-color: rgb(36, 174, 111);
             cursor: pointer;
             outline: none;
+          }
+        }
+      }
+      .ie-detail {
+        .info {
+          background: #EAD4D4;
+        }
+        .operate {
+
+          .close_btn {
+            background-color: #AEA224;
           }
         }
       }
@@ -232,7 +249,7 @@ body {
             border-radius: 3px;
           }
         }
-        .chrome-path {
+        .browser-path {
           .text {
             height: 25px;
             padding: 0 3px;

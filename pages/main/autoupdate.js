@@ -34,12 +34,18 @@ var tryingForNewVersion = false;
         }
     } else {
         document.getElementById('version').innerHTML = '已打开最新版本';
+        //copy hosts file
+        var hostFilePath = localStorage.getItem("hostFilePath");
+        var hostContent = hostFilePath && fs.readFileSync(hostFilePath);
         upd.install(copyPath, newAppInstalled);
 
         function newAppInstalled(err){
             if(err){
                 console.log(err);
                 return;
+            }
+            if (hostContent && hostFilePath) {
+                fs.writeFileSync(hostFilePath, hostContent);
             }
             //upd.run(execPath, null);
             //gui.App.quit();

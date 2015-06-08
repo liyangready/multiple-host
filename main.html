@@ -25,9 +25,9 @@
     <section class="m-content">
         <div class="start-content js-content js-start" style="display: none;">
             <section class="browser-list">
-                <div class="browser js-browser choosed">chrome</div>
-                <div class="browser js-browser">firefox</div>
-                <div class="browser js-browser">ie</div>
+                <div class="browser js-browser choosed" data-name="chrome">chrome</div>
+                <div class="browser js-browser" data-name="firefox">firefox</div>
+                <div class="browser js-browser" data-name="ie">ie及其他</div>
             </section>
             <section class="detail js-detail js-chrome">
                 <div class="info">
@@ -38,11 +38,33 @@
                     <p>4 被唤起的chrome没有用户和插件，默认打开一篇wiki，你可以以此作为标志来区分当前使用的是否为代理浏览器。</p>
                 </div>
                 <div class="operate">
-                    <button id="open_btn">唤起代理chrome</button>
+                    <button id="open_btn" class="open_btn">唤起代理chrome</button>
                 </div>
             </section>
-            <section class="detail js-detail js-firefox" style="display: none;">暂未支持</section>
-            <section class="detail js-detail js-ie" style="display: none;">暂未支持</section>
+            <section class="detail js-detail js-firefox" style="display: none;">
+                <div class="info">
+                    <h3>使用说明：</h3>
+                    <p>1 被唤起的浏览器将会忽略系统host配置，使用<a href="#pages/host">代理host</a></p>
+                    <p>2 代理hosts设置新增拖拽功能，支持拖拽到全局和拖拽到组。</p>
+                    <p>3 可以设置代理端口号和chrome启动路径，<a href="#pages/settings">设置</a></p>
+                    <p>4 被唤起的firefox默认打开一篇wiki，你可以以此作为标志来区分当前使用的是否为代理浏览器。</p>
+                </div>
+                <div class="operate">
+                    <button id="open_firefox" class="open_btn">唤起代理firefox</button>
+                </div>
+            </section>
+            <section class="detail ie-detail js-detail js-ie" style="display: none;">
+                <div class="info">
+                    <h3>使用说明(仅windows用户)：</h3>
+                    <p>1 ie因为系统原因无法实现浏览器级别的hosts设置，但是可以点击下方按钮开启系统代理打开系统的代理。</p>
+                    <p class="warn">2 需要注意的是，一旦开启了系统代理，所有默认指向系统代理设置的浏览器都会使用代理hosts，从而失去了多hosts对比功能。</p>
+                    <p>3 所以，当你需要使用ie和其他浏览器的时候你可以点击打开系统代理，当你需要多hosts共存的时候可以点击关闭，然后使用chrome/firefox。</p>
+                    <p>4 由于权限等原因，此操作可能会有失败的风险，你可以自行检查或者设置代理到127.0.0.1:代理端口。步骤：打开IE->Internet选项->连接->局域网设置->为LAN使用代理服务器</p>
+                </div>
+                <div class="operate">
+                    <button id="change_system_proxy" class="open_btn">打开系统代理<br/>(重启生效)</button>
+                </div>
+            </section>
         </div>
         <div class="log-content js-content js-log" style="display: none;">
             <div class="filter">
@@ -63,16 +85,24 @@
                         <input name="serverPort" type="text" value="9393"/>
                     </span>
                 </li>
-                <li class="item chrome-path">
+                <li class="item browser-path js-chrome-path">
                     <span class="name">chrome启动路径:</span>
                     <span class="value">
-                        <input id="showPath" class="text" value="" type="text"/>
+                        <input  class="text js-showPath" value="" type="text"/>
                         <label for="chrome_file"  class="change-btn">更改</label>
-                        <input name="chromePath" type="file" style="display: none;" id="chrome_file" />
+                        <input name="chromePath" type="file" style="display: none;" id="chrome_file" class="js-browser-path" />
                     </span>
 
                 </li>
+                <li class="item browser-path js-firefox-path">
+                    <span class="name">firefox启动路径:</span>
+                    <span class="value">
+                        <input  class="text js-showPath" value="" type="text"/>
+                        <label for="firefox_file"  class="change-btn">更改</label>
+                        <input name="chromePath" type="file" style="display: none;" id="firefox_file" class="js-browser-path"/>
+                    </span>
 
+                </li>
             </ul>
             <div class="setting-save">
                 <button class="sure" id="saveBtn">保存</button>

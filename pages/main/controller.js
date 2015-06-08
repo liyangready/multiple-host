@@ -1,5 +1,5 @@
 /**
- * Created by leon.li on 2015/5/25.
+ * 蛋疼的布局控制文件
  */
 var fs = require("fs");
 var platform = require("./lib/platform");
@@ -36,7 +36,7 @@ var StartView = ContentView.extend({
         "click .js-browser": "changeBrowser"
     },
     "changeBrowser": function(e) {
-        var className = ".js-" + e.target.innerHTML;
+        var className = ".js-" + $(e.target).data("name");
         var $choose = $(className);
 
         this.$el.find(".choosed").removeClass("choosed");
@@ -52,20 +52,25 @@ var SettingsView = ContentView.extend({
     "el": $(".js-settings")[0],
     "events": {
         "click #saveBtn": "saveSettings",
-        "change #chrome_file": "changeFile"
+        "change .js-browser-path": "changeFile"
     },
     "saveSettings": function() {
 
         var port = this.$el.find("[name=serverPort]").val();
-        var path = this.$el.find("#showPath").val();
+        var chromePath = this.$el.find(".js-chrome-path .js-showPath").val();
+        var firefoxPath = this.$el.find(".js-firefox-path .js-showPath").val();
 
         if (parseInt(port, 10)) {
             localStorage.setItem("serverPort", port);
             process.mainModule.exports.setConfig("serverPort", port);
         }
-        if (fs.existsSync(path)) {
-            localStorage.setItem("chromePath", path);
-            process.mainModule.exports.setConfig("chromePath", path);
+        if (fs.existsSync(chromePath)) {
+            localStorage.setItem("chromePath", chromePath);
+            process.mainModule.exports.setConfig("chromePath", chromePath);
+        }
+        if (fs.existsSync(firefoxPath)) {
+            localStorage.setItem("firefoxPath", firefoxPath);
+            process.mainModule.exports.setConfig("firefoxPath", firefoxPath);
         }
         $(".popup-success").show().animate({
             top: "50%"
@@ -78,15 +83,18 @@ var SettingsView = ContentView.extend({
     },
     "changeFile": function(e) {
         
-        var $show = this.$el.find("#showPath");
+        var $show = $(e.target).siblings(".js-showPath");
         $show.val(e.target.value || "");
     },
     "render": function() {
         var port = localStorage.getItem("serverPort") || 9393;
-        var path = localStorage.getItem("chromePath") || platform.defaultChromePath;
+        var chromePath = localStorage.getItem("chromePath") || platform.defaultChromePath;
+        var firefoxPath = localStorage.getItem("firefoxPath") || platform.defaultFirefoxPath;
 
         this.$el.find("[name=serverPort]").val(port);
-        this.$el.find("#showPath").val(path);
+        this.$el.find(".js-chrome-path .js-showPath").val(chromePath);
+        this.$el.find(".js-firefox-path .js-showPath").val(firefoxPath);
+
     }
 });
 var LogView = ContentView.extend({

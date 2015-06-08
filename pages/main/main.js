@@ -14,33 +14,77 @@ var btn = document.getElementById("open_btn");
 btn.addEventListener("click", function(event) {
 
     try {
-        // var command;
 
-        // var chromePath = localStorage.getItem("chromePath");
         var port = localStorage.getItem("serverPort") || 9393;
-        // if (chromePath) {
-        //     var arr = chromePath.split('\\');
-        //     var exeName = arr.pop();
-        //     var devPath = path.join(execPath, "/chrome-dev");
-
-        //     chromePath = arr.join('\\');
-
-        //     command = 'start \/d "' + chromePath + '" ' + exeName + ' --proxy-server="http://127.0.0.1:' + port +'"  --user-data-dir='+ devPath +'  --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
-        // }
-        // else {
-        //     command = 'start chrome --proxy-server="http://127.0.0.1:' + port + '" --user-data-dir='+ devPath + ' --lang=local  http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765';
-        // }
         
-        var command = platform.startChromeCommand();
-        console.log(command);
-        exec(command, function (error) {
-
+        platform.startChrome(function(error) {
             if (error) {
                 logger.doLog("log", error.message );
             }
             first && logger.doLog("log", "chrome启动成功，代理端口: " + port );
             first = false;
         });
+
+
+    } catch (err) {
+        logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+    }
+
+}, false);
+
+/*唤起firefox*/
+var first = true;
+var btn = document.getElementById("open_firefox");
+btn.addEventListener("click", function(event) {
+
+    try {
+
+        var port = localStorage.getItem("serverPort") || 9393;
+
+        platform.startFirefox(function(error) {
+            if (error) {
+                logger.doLog("log", error.message );
+            }
+            first && logger.doLog("log", "firefox启动成功，代理端口: " + port );
+            first = false;
+        });
+
+
+    } catch (err) {
+        logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+    }
+
+}, false);
+/*唤起firefox*/
+
+/*更改系统设置*/
+var btn = document.getElementById("change_system_proxy");
+btn.addEventListener("click", function(event) {
+    var $target = $(event.target);
+    try {
+        var port = localStorage.getItem("serverPort") || 9393;
+
+        if (platform.platform == "mac") {
+            alert("mac用户请自行设置系统代理");
+        }
+        if ($target.hasClass("open_btn")) {
+            platform.setSystemProxy(function(error) {
+                if (error) {
+                    logger.doLog("log", error.message );
+                }
+                logger.doLog("log", "系统代理设置成功，代理端口: " + port );
+                $target.removeClass("open_btn").addClass("close_btn").html("关闭系统代理<br/>(重启浏览器生效)");
+            });
+        }
+        else {
+            platform.disableSystemProxy(function(error) {
+                if (error) {
+                    logger.doLog("log", error.message );
+                }
+                logger.doLog("log", "系统代理关闭成功 ");
+                $target.removeClass("close_btn").addClass("open_btn").html("打开系统代理<br/>(重启浏览器生效)");
+            });
+        }
     } catch (err) {
         logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
     }

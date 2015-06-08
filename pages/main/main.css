@@ -138,6 +138,9 @@ body {
       margin: 20px;
       border: 1px dotted #666;
       border-radius: 5px; }
+      .m-wrapper .m-content .start-content .detail .info .warn {
+        color: #000;
+        font-weight: bold; }
     .m-wrapper .m-content .start-content .detail .info p {
       font-size: 12px;
       margin: 10px 0;
@@ -146,7 +149,7 @@ body {
       height: 50px;
       margin-top: 20px;
       text-align: center; }
-      .m-wrapper .m-content .start-content .detail .operate #open_btn {
+      .m-wrapper .m-content .start-content .detail .operate .open_btn, .m-wrapper .m-content .start-content .detail .operate .close_btn {
         width: 120px;
         height: 40px;
         border-radius: 5px;
@@ -155,6 +158,10 @@ body {
         background-color: #24ae6f;
         cursor: pointer;
         outline: none; }
+    .m-wrapper .m-content .start-content .ie-detail .info {
+      background: #EAD4D4; }
+    .m-wrapper .m-content .start-content .ie-detail .operate .close_btn {
+      background-color: #AEA224; }
     .m-wrapper .m-content .host-content .hostManager {
       width: 100%;
       height: 100%; }
@@ -180,7 +187,7 @@ body {
         text-align: center;
         border: 1px solid #C3C3C3;
         border-radius: 3px; }
-      .m-wrapper .m-content .settings-content .setting-list .chrome-path .text {
+      .m-wrapper .m-content .settings-content .setting-list .browser-path .text {
         height: 25px;
         padding: 0 3px;
         width: 200px;
@@ -192,7 +199,7 @@ body {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap; }
-      .m-wrapper .m-content .settings-content .setting-list .chrome-path .change-btn {
+      .m-wrapper .m-content .settings-content .setting-list .browser-path .change-btn {
         margin-left: 3px;
         display: inline-block;
         width: 45px;
