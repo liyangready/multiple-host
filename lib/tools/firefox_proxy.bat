@@ -18,4 +18,4 @@ set ffile=
 cd %windir%
 
 :: "start Firefox"
-start /D "%ffdir%" firefox.exe -P ff_dev
+start /D "%ffdir%" firefox.exe -P ff_dev -no-remote
