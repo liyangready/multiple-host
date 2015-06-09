@@ -38,7 +38,7 @@ body {
 
   }
 
-  .mini, .close {
+  .mini, .close, .ontop {
     display: inline-block;
     color: #fff;
     font-weight: bold;
@@ -47,6 +47,14 @@ body {
     width: 30px;
     text-align: center;
     -webkit-app-region: no-drag;
+  }
+  .ontop {
+    height: 30px;
+    background: url(../../image/ontop.png) no-repeat 5px 3px;
+    padding-bottom: 4px;
+  }
+  .ontop:hover, .ontop-select {
+    background-color: #DB9C9C;
   }
   .close {
     font-size: 22px;
@@ -198,11 +206,17 @@ body {
             cursor: pointer;
             outline: none;
           }
+          .open_btn:hover {
+            background-color: #66B893;
+          }
         }
       }
       .ie-detail {
         .info {
           background: #EAD4D4;
+          .usr-info p{
+            margin: 5px 0;
+          }
         }
         .operate {
 

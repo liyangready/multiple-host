@@ -9,8 +9,9 @@
     <h1 class="name shimmer">Multiple-Host</h1>
     <span class="detail"  >本地多host环境工具</span>
     <div class="window-tool">
-        <span class="mini" id="minify">▬</span>
-        <span class="close" id="close">×</span>
+        <span class="ontop" id="alwaysOnTop" title="窗口置顶"></span>
+        <span class="mini" id="minify" title="最小化">▬</span>
+        <span class="close" id="close" title="关闭">×</span>
     </div>
 
 </div>
@@ -55,14 +56,22 @@
             </section>
             <section class="detail ie-detail js-detail js-ie" style="display: none;">
                 <div class="info">
-                    <h3>使用说明(仅windows用户)：</h3>
-                    <p>1 ie因为系统原因无法实现浏览器级别的hosts设置，但是可以点击下方按钮开启系统代理打开系统的代理。</p>
-                    <p class="warn">2 需要注意的是，一旦开启了系统代理，所有默认指向系统代理设置的浏览器都会使用代理hosts，从而失去了多hosts对比功能。</p>
-                    <p>3 所以，当你需要使用ie和其他浏览器的时候你可以点击打开系统代理，当你需要多hosts共存的时候可以点击关闭，然后使用chrome/firefox。</p>
-                    <p>4 由于权限等原因，此操作可能会有失败的风险，你可以自行检查或者设置代理到127.0.0.1:代理端口。步骤：打开IE->Internet选项->连接->局域网设置->为LAN使用代理服务器</p>
+                    <h3>使用说明：</h3>
+                    <p>1 ie 因为系统原因无法实现浏览器级别的hosts设置，但是可以点击下方按钮开启系统代理打开系统的代理。</p>
+                    <p class="warn">2 需要注意的是，一旦开启了系统代理，所有代理设置为使用系统代理的浏览器都会使用代理hosts，从而失去了多hosts对比功能。(ie 需要重启生效)</p>
+                    <p>3 所以，当你需要使用 ie 和其他浏览器的时候你可以点击打开系统代理，当你需要多hosts共存的时候可以点击关闭，然后打开代理chrome/firefox。</p>
+                    <div class="usr-info">
+                        <p>mac用户:</p>
+                        <p> ● 由于修改系统代理设置需要sudo权限，有可能需要输入sudo密码。如果失败可自行修改。</p>
+                        <p> ● 步骤：系统偏好设置->网络->高级->设置代理到127.0.0.1:<span class="js-serverPort"></span></p>
+                        <p>windows用户：</p>
+                        <p> ● 如果失败可以尝试用 管理员身份运行程序。也可以自行检查或者设置代理。</p>
+                        <p> ● 步骤：打开IE->Internet选项->连接->局域网设置->为LAN使用代理服务器->设置代理到127.0.0.1:<span class="js-serverPort"></span></p>
+                    </div>
+
                 </div>
                 <div class="operate">
-                    <button id="change_system_proxy" class="open_btn">打开系统代理<br/>(重启生效)</button>
+                    <button id="change_system_proxy" class="open_btn">打开系统代理</button>
                 </div>
             </section>
         </div>
@@ -102,6 +111,10 @@
                         <input name="chromePath" type="file" style="display: none;" id="firefox_file" class="js-browser-path"/>
                     </span>
 
+                </li>
+                <li class="item">
+                    <input type="checkbox" id="minifySetting"/>
+                    <label for="minifySetting">最小化到托盘</label>
                 </li>
             </ul>
             <div class="setting-save">

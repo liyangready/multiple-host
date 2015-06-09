@@ -16,13 +16,13 @@
     },
     "packages": {
         "win": {
-            "url": "http://127.0.0.1:3000/nw/win/updapp.zip"
+            "url": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/win/updapp.zip"
         },
         "mac": {
             "url": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/mac/updapp.zip"
         }
     },
-    "manifestUrl": "http://127.0.0.1:3000/nw/package.json",
+    "manifestUrl": "http://l-log1.f.dev.cn0.qunar.com:3000/nw/package.json",
     "node-remote": "*",
-    "version": "0.0.4"
+    "version": "0.0.6"
 }

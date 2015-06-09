@@ -38,6 +38,8 @@ var StartView = ContentView.extend({
     "changeBrowser": function(e) {
         var className = ".js-" + $(e.target).data("name");
         var $choose = $(className);
+        var port = localStorage.getItem("serverPort") || 9393;
+        $(".js-serverPort").html(port);
 
         this.$el.find(".choosed").removeClass("choosed");
         $(".js-detail").hide();
@@ -59,16 +61,19 @@ var SettingsView = ContentView.extend({
         var port = this.$el.find("[name=serverPort]").val();
         var chromePath = this.$el.find(".js-chrome-path .js-showPath").val();
         var firefoxPath = this.$el.find(".js-firefox-path .js-showPath").val();
+        var minifySetting = this.$el.find("#minifySetting").prop('checked');
 
-        if (parseInt(port, 10)) {
+        localStorage.setItem("minifySetting", minifySetting); //最小化到托盘
+
+        if (parseInt(port, 10)) { //node端口
             localStorage.setItem("serverPort", port);
             process.mainModule.exports.setConfig("serverPort", port);
         }
-        if (fs.existsSync(chromePath)) {
+        if (fs.existsSync(chromePath)) { //chrome地址
             localStorage.setItem("chromePath", chromePath);
             process.mainModule.exports.setConfig("chromePath", chromePath);
         }
-        if (fs.existsSync(firefoxPath)) {
+        if (fs.existsSync(firefoxPath)) { //ff地址
             localStorage.setItem("firefoxPath", firefoxPath);
             process.mainModule.exports.setConfig("firefoxPath", firefoxPath);
         }
@@ -90,11 +95,13 @@ var SettingsView = ContentView.extend({
         var port = localStorage.getItem("serverPort") || 9393;
         var chromePath = localStorage.getItem("chromePath") || platform.defaultChromePath;
         var firefoxPath = localStorage.getItem("firefoxPath") || platform.defaultFirefoxPath;
+        var minifySetting = localStorage.getItem("minifySetting");
 
+        minifySetting = minifySetting == "true" ? true : false;
         this.$el.find("[name=serverPort]").val(port);
         this.$el.find(".js-chrome-path .js-showPath").val(chromePath);
         this.$el.find(".js-firefox-path .js-showPath").val(firefoxPath);
-
+        this.$el.find("#minifySetting").prop('checked', minifySetting);
     }
 });
 var LogView = ContentView.extend({
