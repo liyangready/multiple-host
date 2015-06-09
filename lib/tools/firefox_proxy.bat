@@ -1,9 +1,10 @@
-set port=9696
-set ffidr=C:\Program Files (x86)\Mozilla Firefox
+set port=9393
+set ffdir=D:\leon\little-tools\firefox
 
 :: "create profile"
 cd /D %ffdir%
 firefox -CreateProfile ff_dev
+echo  %ffdir%
 
 :: "setting proxy"
 cd /D "%APPDATA%\Mozilla\Firefox\Profiles"
@@ -18,4 +19,4 @@ set ffile=
 cd %windir%
 
 :: "start Firefox"
-start /D "%ffdir%" firefox.exe -P ff_dev -no-remote
+start /D "%ffdir%" firefox.exe -P ff_dev -no-remote http://wiki.corp.qunar.com/pages/viewpage.action?pageId=77931765

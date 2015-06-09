@@ -9,20 +9,28 @@ var execPath = path.dirname( process.execPath );
 var platform = require("./lib/platform");
 
 /*唤起chrome*/
-var first = true;
 var btn = document.getElementById("open_btn");
 btn.addEventListener("click", function(event) {
-
+    var self = this;
+    if ($(this).hasClass("lock")) {
+        return;
+    }
     try {
-
         var port = localStorage.getItem("serverPort") || 9393;
-        
+        $(this).addClass("lock");
+        $(this).html("启动中...");
         platform.startChrome(function(error) {
             if (error) {
                 logger.doLog("log", error.message );
             }
-            first && logger.doLog("log", "chrome启动成功，代理端口: " + port );
-            first = false;
+            else {
+                logger.doLog("log", "chrome启动成功，代理端口: " + port );
+            }
+
+            setTimeout(function() {
+                $(self).removeClass("lock");
+                $(self).html("唤起代理chrome");
+            }, 2000);
         });
 
 
@@ -33,20 +41,29 @@ btn.addEventListener("click", function(event) {
 }, false);
 
 /*唤起firefox*/
-var first = true;
 var btn = document.getElementById("open_firefox");
 btn.addEventListener("click", function(event) {
-
+    var self = this;
+    if ($(this).hasClass("lock")) {
+        return;
+    }
     try {
-
         var port = localStorage.getItem("serverPort") || 9393;
+        $(this).addClass("lock");
+        $(this).html("启动中...");
 
         platform.startFirefox(function(error) {
             if (error) {
                 logger.doLog("log", error.message );
             }
-            first && logger.doLog("log", "firefox启动成功，代理端口: " + port );
-            first = false;
+            else {
+                logger.doLog("log", "firefox启动成功，代理端口: " + port );
+            }
+            setTimeout(function() {
+                $(self).removeClass("lock");
+                $(self).html("唤起代理firefox");
+            }, 2000);
+
         });
 
 

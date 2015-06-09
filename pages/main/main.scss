@@ -99,7 +99,12 @@ body {
     border-radius: 3px;
     font-size: 23px;
   }
-
+  .lock {
+    background-color: #8C8686 !important;
+  }
+  .lock:hover {
+    background-color: #8C8686 !important;
+  }
   .m-menu {
     flex: 1;
     background-color: #272727;
