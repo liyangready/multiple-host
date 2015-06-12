@@ -59,13 +59,12 @@ btn.addEventListener("click", function(event) {
             else {
                 logger.doLog("log", "firefox启动成功，代理端口: " + port );
             }
-            setTimeout(function() {
-                $(self).removeClass("lock");
-                $(self).html("唤起代理firefox");
-            }, 2000);
 
         });
-
+        setTimeout(function() {
+           $(self).removeClass("lock");
+           $(self).html("唤起代理firefox");
+        }, 5000);
 
     } catch (err) {
         logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
@@ -78,6 +77,7 @@ btn.addEventListener("click", function(event) {
 var btn = document.getElementById("change_system_proxy");
 btn.addEventListener("click", function(event) {
     var $target = $(event.target);
+
     try {
         var port = localStorage.getItem("serverPort") || 9393;
 
@@ -86,8 +86,11 @@ btn.addEventListener("click", function(event) {
                 if (error) {
                     logger.doLog("log", error.message );
                 }
-                logger.doLog("log", "系统代理设置成功，代理端口: " + port );
-                $target.removeClass("open_btn").addClass("close_btn").html("关闭系统代理");
+                else {
+                    logger.doLog("log", "系统代理设置成功，代理端口: " + port );
+                    $target.removeClass("open_btn").addClass("close_btn").html("关闭系统代理");
+                }
+                
             });
         }
         else {
@@ -95,8 +98,11 @@ btn.addEventListener("click", function(event) {
                 if (error) {
                     logger.doLog("log", error.message );
                 }
-                logger.doLog("log", "系统代理关闭成功 ");
-                $target.removeClass("close_btn").addClass("open_btn").html("打开系统代理");
+                else {
+                    logger.doLog("log", "系统代理关闭成功 ");
+                    $target.removeClass("close_btn").addClass("open_btn").html("打开系统代理");
+                }
+                
             });
         }
     } catch (err) {
