@@ -173,7 +173,7 @@ define(function (require, exports) {
             data = data || BackModel.get('data') || exports.loadData(),
             i, c, d, entry;
 
-        //类似这样的数组:['# user center', '192.168.235.63 user.qunar.com', '192.168.235.63 headshot.user.qunar.com']
+        //类似这样的数组:
         //console.log('exports.parseData content : ', content, content.join(','));
         for (i = 0; i < content.length; i++) {
             entry = new Entry();
