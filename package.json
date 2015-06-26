@@ -2,7 +2,7 @@
     "name": "multiple-host",
     "main": "main.html",
     "node-main": "nodemain.js",
-    "author": "leon.li@qunar.com",
+    "author": "liyangread@gmail.com",
     "window": {
         "width": 760,
         "height": 600,
