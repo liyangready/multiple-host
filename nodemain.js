@@ -42,9 +42,10 @@ function startNode() {
 
                     req.needDnsResolve = true;
                 }
+
             }
             catch(e) {
-                logger.doLog.doLog("error", e.message);
+                logger.doLog("error", e.message);
             }
         },
         onServerError: function(e) {
