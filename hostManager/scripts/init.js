@@ -18,7 +18,7 @@ define(function (require, exports) {
     view.refresh(false, 'hosts');
 
     // 显示当前tab的IP
-    view.showCurrentIP();
-
+  //  view.showCurrentIP();
+    window.view = view;
     require('./util/open.js');
 });

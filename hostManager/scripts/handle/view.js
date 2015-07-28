@@ -8,7 +8,7 @@ define(function(require, exports) {
 	var biz = require('./biz.js'),
 
     Drop = require('./drop.js'),
-
+    Entry = require('../model/entry.js'),
 	// 工具集
 	util = require('../util/util.js'),
 
@@ -171,6 +171,7 @@ define(function(require, exports) {
 	 * 添加组
 	 */
 	exports.addGroup = function(target, line) {
+
 		var fields = biz.editFields({
 			addr: '127.0.0.1',
 			hostname: '',
@@ -253,20 +254,37 @@ define(function(require, exports) {
 	exports.expand = function(target) {
 		if (!target.hasClass('lock')) {
 			target.addClass('lock');
-			var group = target.closest('.group'),
-			collapse = target.hasClass('collapse');
-			group.data('target').hide = collapse;
-			if (_saveData()) {
-				if (collapse) { // 收缩已经展开的
-					group.next().slideUp(function() {
-						target.removeClass('collapse lock').addClass('expand');
-					});
-				} else { // 展开已经收缩的
-					group.next().slideDown(function() {
-						target.removeClass('expand lock').addClass('collapse');
-					});
-				}
-			}
+            if (target.hasClass("changeAll")) {
+                //展开/收起所有
+                var collapse = target.hasClass('collapse');
+                var groups = $(".group");;
+                if (!collapse) {
+                    groups.next().show();
+                    target.data("title", "收起所有");
+                    $(".expand").removeClass('expand lock').addClass('collapse');
+                }
+                else {
+                    groups.next().hide();
+                    target.data("title", "展开所有");
+                    $(".collapse").removeClass('collapse lock').addClass('expand');
+                }
+            }
+            else {
+                var group = target.closest('.group'),
+                    collapse = target.hasClass('collapse');
+                group.data('target').hide = collapse;
+                if (_saveData()) {
+                    if (collapse) { // 收缩已经展开的
+                        group.next().slideUp(function() {
+                            target.removeClass('collapse lock').addClass('expand');
+                        });
+                    } else { // 展开已经收缩的
+                        group.next().slideDown(function() {
+                            target.removeClass('expand lock').addClass('collapse');
+                        });
+                    }
+                }
+            }
 		}
 	};
 
@@ -344,16 +362,16 @@ define(function(require, exports) {
         //默认从storage中获取数据
         cacheType = cacheType || 'hosts';
 
-		var val = $('#hostsPath').val();
-		if (!val) {
-			tip.showErrorTip(util.i18n('blankPath'));
-		} else if (!util.fileExists(val)) {
-			tip.showErrorTip(util.i18n('fileNotExist'));
-		} else if (util.isDirectory(val)) {
-			tip.showErrorTip(util.i18n('noDirectory'));
-		} else {
+//		var val = $('#hostsPath').val();
+//		if (!val) {
+//			tip.showErrorTip(util.i18n('blankPath'));
+//		} else if (!util.fileExists(val)) {
+//			tip.showErrorTip(util.i18n('fileNotExist'));
+//		} else if (util.isDirectory(val)) {
+//			tip.showErrorTip(util.i18n('noDirectory'));
+//		} else {
 			try {
-				biz.setHostsPath(val);
+				//biz.setHostsPath(val);
                 //从hosts文件读取数据或者从model中读取缓存数据
 				var data = biz.loadData(cacheType),
                 //主要内容的容器
@@ -401,7 +419,7 @@ define(function(require, exports) {
 			} catch (e) {
 				tip.showErrorTip(util.i18n('cantReadFile'));
 			}
-		}
+//		}
 	};
 
     /**
@@ -476,7 +494,7 @@ define(function(require, exports) {
 	 * 显示当前路径的绑定
 	 */
 	exports.current = function() {
-        
+
         var data = biz.getData('data'),
             i, sum, toHide;
         var isHiddenDisable = _mark('isHiddenDisable');
@@ -526,12 +544,63 @@ define(function(require, exports) {
 			ip && $('#currentIP').html(util.i18n('currentTabIP') + ip);
 		});
 	};
+    /*
+    * 批量编辑功能
+    * 分两种：一种是编辑所有host，一种是编辑当前分组的host
+    * */
+    exports.editAsFile = function(target) {
 
-	/**
+        var node = target.closest('.node');
+        var line = '';
+        var title = util.i18n('editAsFile');
+        var value;
+        //如果是组内导入
+        if (node.hasClass('group')) {
+            var data = biz.loadData();
+            line =  node.data('target').line;
+            title += "(组" + node.data('target').line + ")";
+            value = data[line] && data[line].toString();
+        }
+        else {
+
+            value = biz.readFile( biz.getHostsPath() );
+        }
+        editor.show(title, [{
+            label: util.i18n('editAsFile'),
+            name: 'editAsFile',
+            type: 'textarea',
+            value: value
+        }],function(err, data) {
+            //console.log('view.js exports.imports : ', data, err);
+            //data.imports就是导入的内容.
+
+            var fragment = $.trim(data.editAsFile) || '';
+//            if (fragment) {
+                //如果是组内导入
+                if (node.hasClass('group')) {
+                    var data = biz.getData('data');
+
+                    data[line] =  new Entry(line); //清除原数据
+                    biz.parseData(fragment, null, line);
+                }
+                //如果是全局导入
+                else {
+                    biz.parseData(fragment, {});
+                }
+
+                _saveData();
+
+                exports.refresh(false);
+//            }
+            editor.hide();
+        });
+    }
+ 	/**
 	 * 导入功能,多行hosts数据
      * 分两种:一种是页面顶部的全局导入,另外一种是导入到组内
 	 */
 	exports.imports = function(target) {
+
 		var node = target.closest('.node');
 		editor.show(target.data('title'), [{
 			label: target.data('title'),

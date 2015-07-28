@@ -6,10 +6,9 @@
  */
 var NodeFs = null;
 var path = require("path");
-var execPath = path.dirname( process.execPath );
-
-var defaultHost = path.join(execPath , "/hosts");
-
+var fs = require("fs");
+var gui = require('nw.gui');
+var defaultHost = path.join( gui.App.dataPath , './hosts');
 
 if (typeof require === 'function') {
     NodeFs = require('fs');
@@ -75,25 +74,12 @@ define(function (require, exports) {
          * 获取hosts文件路径
          */
         getHostsPath: function () {
+            //隐藏文件路径
 
-            try {
-                if(_Embed && _Embed.getPlatform) {
-                    var _p = _Embed.getPlatform();
-                    if(_p == 'windows') {
-                        return HostsAddr.windows;
-                    }
-                    if(_p == 'mac') {
-                        return HostsAddr.mac;
-                    }
-                    return HostsAddr.others;
-                }
-            } catch (e) {
-                if (BackModel.get('writeStorage') == '0') {
-                    throw e;
-                }
+            var path = defaultHost;
+            if (!fs.existsSync(path)) {
+                fs.writeFileSync(path, '#default \n 127.0.0.1 localhost', 'utf-8');
             }
-
-            var path = BackModel.get("hostFilePath") || defaultHost;
             return path;
         },
 

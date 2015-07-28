@@ -23,29 +23,38 @@ var d = false;
 var updater = require('./lib/updater.js');
 var upd = new updater(pkg);
 var tryingForNewVersion = false;
-
+var execPath = path.dirname( process.execPath );
 //for test purposes
+var gui = require('nw.gui');
+var defaultHost = path.join( gui.App.dataPath , './hosts');
 
     if(!copyPath){
+
         request.get(url.resolve(pkg.manifestUrl, '/version/'+ pkg.version));
         document.getElementById('version').innerHTML = '当前版本 ' + pkg.version;
         if(!d) {
             upd.checkNewVersion(versionChecked);
         }
     } else {
-        document.getElementById('version').innerHTML = '已打开最新版本';
-        //copy hosts file
-        var hostFilePath = localStorage.getItem("hostFilePath");
-        var hostContent = hostFilePath && fs.readFileSync(hostFilePath);
+        try {
+            document.getElementById('version').innerHTML = '已打开最新版本';
+            //copy hosts file
+            var hostFilePath = localStorage.getItem("hostFilePath");
+
+            if ( hostFilePath && fs.existsSync(hostFilePath) ) {
+                var hostContent = fs.readFileSync(hostFilePath);
+                fs.writeFileSync(defaultHost, hostContent);
+                localStorage.removeItem("hostFilePath");
+            }
+        } catch(e) {
+
+        }
         upd.install(copyPath, newAppInstalled);
 
         function newAppInstalled(err){
             if(err){
                 console.log(err);
                 return;
-            }
-            if (hostContent && hostFilePath) {
-                fs.writeFileSync(hostFilePath, hostContent);
             }
             //upd.run(execPath, null);
             //gui.App.quit();

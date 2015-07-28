@@ -10,20 +10,25 @@
     <script type="text/template" id="headTemp">
         <!--<div class="version selectable"><b>{{:appName}}</b> v{{version}}</div>-->
         <div class="panel">
-            <span class="hosts-path">{{:hostsPath}}</span>
+            <span class="hosts-title">{{:hostsTitle}}</span>
 
-            <span><input id="hostsPath" class="hosts-editor" value="{{hostsPath}}"/></span>
+            <!--<span><input id="hostsPath" class="hosts-editor" value="{{hostsPath}}"/></span>-->
 
-            <span class="choose-path"><label for="hostsToUpload">更改</label><input type="file" name="hostsToUpload" id="hostsToUpload" style="display: none;"/></span>
+            <!--<span class="choose-path"><label for="hostsToUpload">更改</label><input type="file" name="hostsToUpload" id="hostsToUpload" style="display: none;"/></span>-->
 
             <!--bind.js中绑定点击,点击后调用view.js中同名exports方法-->
             <!--<span class="icon fade link" data-title="{{:link}}" data-handle="link"></span>-->
             <!--<span class="icon fade refresh" data-title="{{:refresh}}" data-handle="storageRefresh"></span>-->
-            <span class="icon fade refresh" data-title="{{:hostsRefresh}}" data-handle="hostsRefresh"></span>
-            <span class="icon fade import" data-title="{{:import}}" data-handle="imports"></span>
-            <!--<span class="icon fade save" data-title="{{:backup}}" data-handle="backup"></span>-->
-            <span class="icon fade add" data-title="{{:addGroup}}" data-handle="addGroup"></span>
-            <span class="icon fade show" data-title="{{:current}}" data-handle="current"></span>
+            <!--<span class="icon fade refresh" data-title="{{:hostsRefresh}}" data-handle="hostsRefresh"></span>-->
+            <!--<span class="icon fade import" data-title="{{:import}}" data-handle="imports"></span>-->
+            <span class="header-icon">
+                <span class="icon fade edit editAsFile" data-title="{{:editAsFile}}" data-handle="editAsFile"></span>
+                <span class="icon fade add" data-title="{{:addGroup}}" data-handle="addGroup"></span>
+                <span class="icon fade show" data-title="{{:current}}" data-handle="current"></span>
+                <span class="icon fade expand changeAll"  data-title="{{:expand}}" data-handle="expand"></span>
+
+            </span>
+
         </div>
     </script>
 
@@ -35,9 +40,9 @@
                 <span class="selectable" data-title="{{line}}">{{line}}</span>
             </div>
             <div class="ctrl">
+                <span class="icon fade edit" data-title="{{:editAsFile}}" data-handle="editAsFile"></span>
                 <span class="icon fade add" data-title="{{:addLine}}" data-handle="addLine"></span>
-                <span class="icon fade edit" data-title="{{:editGroup}}" data-handle="edit"></span>
-                <span class="icon fade import" data-title="{{:importGroup}}" data-handle="imports"></span>
+                <span class="icon fade import" data-title="{{:editGroup}}" data-handle="edit"></span>
                 <span class="icon fade remove" data-title="{{:removeGroup}}" data-handle="remove"></span>
                 <span class="icon {{hide?expand:collapse}}" data-handle="expand"></span>
             </div>
@@ -97,7 +102,7 @@
                 <label for="olEditor-{{name}}">{{label}}</label>
             </td>
             <td>
-                <textarea id="olEditor-{{name}}" name="{{name}}" style="width: 500px; height: 200px;">{{value}}</textarea>
+                <textarea id="olEditor-{{name}}" name="{{name}}" style="width: 500px; height: 340px;">{{value}}</textarea>
             </td>
         </tr>
     </script>
@@ -120,7 +125,7 @@
             <!--<div id="_d_tip" class="tip">-->
                 <!--<span>把hosts文件拖拽到这里全局上传</span>-->
             <!--</div>-->
-            <!--&lt;!&ndash;进度条&ndash;&gt;-->
+
             <!--<div class="canvasW" id="_d_canvas_w" style="display: none">-->
                 <!--<canvas id="_d_canvas" width="500" height="20" class="canvas"></canvas>-->
             <!--</div>-->

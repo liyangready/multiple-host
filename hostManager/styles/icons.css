@@ -2,7 +2,7 @@
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background: url("../images/sprites.png") no-repeat;
+	background: url("../images/sprites2.png") no-repeat;
 	cursor: pointer;
 	vertical-align: top;
 }
@@ -19,10 +19,10 @@
 	background-position: -16px -16px;
 }
 .add {
-	background-position: 0 -32px;
+	background-position: 0 -275px;
 }
 .add:hover {
-	background-position: -16px -32px;
+	background-position: -16px -275px;
 }
 .save {
 	background-position: 0 -48px;

@@ -11,12 +11,14 @@ var ContentView = Backbone.View.extend({
         var toClass = ".js-to-" + this.model.get("hashName");
         $(".js-content").hide();
         $(showViewClass).show();
-
+        this.beforeShow();
         $(".selected").removeClass("selected");
         $(toClass).addClass("selected");
     },
     "initialize": function() {
 
+    },
+    "beforeShow": function() {
     }
 });
 var startModel = new ContentModel();
@@ -118,9 +120,16 @@ var LogView = ContentView.extend({
         window.logger.filterLogger(e.target.value);
     }
 
-})
+});
+
+var HostView = ContentView.extend({
+    "beforeShow": function() {
+        this.el.children[0].contentWindow.view.refresh(false, 'hosts'); //每次更新一遍
+    },
+    "el": $(".js-host")[0]
+});
 var logView = new LogView();
-var hostView = new ContentView({"model": hostModel});
+var hostView = new HostView({"model": hostModel});
 var settingsView = new SettingsView();
 
 var AppRouter  = Backbone.Router.extend({

@@ -244,7 +244,10 @@ define(function(require, exports) {
 	 * 获取hosts文件路径
 	 */
 	exports.getHostsPath = model.getHostsPath;
-
+    /*
+    * 读取文件内容
+    * */
+    exports.readFile = model.readFile;
 	/**
 	 * 设置hosts文件路径
 	 */

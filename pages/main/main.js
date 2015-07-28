@@ -27,12 +27,12 @@ btn.addEventListener("click", function(event) {
                 logger.doLog("log", "chrome启动成功，代理端口: " + port );
             }
 
-            setTimeout(function() {
-                $(self).removeClass("lock");
-                $(self).html("唤起代理chrome");
-            }, 2000);
         });
 
+        setTimeout(function() {
+            $(self).removeClass("lock");
+            $(self).html("唤起代理chrome");
+        }, 5000);
 
     } catch (err) {
         logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
@@ -130,6 +130,12 @@ $(document).on({
 // Load native UI library
 var gui = require('nw.gui');
 var win = gui.Window.get();
+// mac menu
+if (platform.platform == "mac") {
+    var nativeMenuBar = new gui.Menu({ type: "menubar" });
+    nativeMenuBar.createMacBuiltin("My App");
+    win.menu = nativeMenuBar;
+}
 
 // Listen to the minimize event
 win.on('minimize', function() {

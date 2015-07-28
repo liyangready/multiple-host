@@ -240,7 +240,12 @@ body {
     vertical-align: top;
     color: #333;
 }
+.panel .header-icon {
+    float:  right;
+}
+.panel .header-icon .editAsFile {
 
+}
 .panel .choose-path label{
     display: inline-block;
     width: 50px;

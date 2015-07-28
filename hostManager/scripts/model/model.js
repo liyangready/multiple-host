@@ -52,6 +52,7 @@
      #192.168.237.74	qunarzz.com
      #192.168.235.63	l-api.user.qunar.com
  **/
+var fs = require("fs");
 define(function (require, exports) {
     'require:nomunge,exports:nomunge,module:nomunge';
 
@@ -121,8 +122,11 @@ define(function (require, exports) {
      * 删除数据
      */
     exports.remove = BackModel.remove;
-
-    /**
+    /*
+    * 读文件
+    * */
+    exports.readFile = BackModel.readFile;
+     /**
      * 添加组
      */
     exports.addGroup = function (groupData) {
@@ -181,6 +185,7 @@ define(function (require, exports) {
      * 解析数据
      */
     exports.parseData = function (dataStr, data, group) {
+
         var content = dataStr.split(/\r?\n/),
             //优先使用传入的data
             //如果没有data,则从model中去取

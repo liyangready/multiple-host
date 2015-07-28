@@ -2,7 +2,9 @@
     "message": "管理hosts文件的Chrome插件。"
 }, "appName": {
     "message": "hosts文件管理工具"
-}, "addLine": {
+},"hostsTitle": {
+    "message": "管理代理hosts"
+} , "addLine": {
     "message": "向该组添加绑定"
 }, "editGroup": {
     "message": "修改组名"
@@ -22,6 +24,10 @@
     "message": "创建一个新组"
 }, "hostsRefresh":{
     "message": "重新加载host文件"
+}, "editAsFile": {
+  "message": "作为文本编辑"
+}, "expand": {
+    "message": "展开所有"
 },"refresh": {
     "message": "重新从浏览器缓存载入"
 }, "backup": {
