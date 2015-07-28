@@ -31,15 +31,15 @@ multiple-host就是为了解决烦人的host问题而诞生的。
 
 效果图：
 
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/1.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/1.png)
 
 ## <a id="how">如何使用</a>
 
 multiple-host是一个应用程序，解压缩点击运行即可。
 
-1 点击![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/3.png)，mac用户是app应用，windows是exe，得到如下运行界面：
+1 点击![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/3.png)，mac用户是app应用，windows是exe，得到如下运行界面：
 
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/2.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/2.png)
 
 程序左侧有四个功能：
 
@@ -51,7 +51,7 @@ multiple-host是一个应用程序，解压缩点击运行即可。
 
 *chrome*：
 
-比如点击唤起chrome![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/5.png)，会打开一个chrome，在这个chrome中的所有访问都不受系统host影响，只受虚拟host影响，虚拟host的设置在 代理host一栏。同时，你通过正常手段打开的chrome不受这个影响，只受系统host影响，从而你可以给正常chrome配一套host环境，给从程序中打开的chrome配另一套虚拟的host环境。
+比如点击唤起chrome![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/5.png)，会打开一个chrome，在这个chrome中的所有访问都不受系统host影响，只受虚拟host影响，虚拟host的设置在 代理host一栏。同时，你通过正常手段打开的chrome不受这个影响，只受系统host影响，从而你可以给正常chrome配一套host环境，给从程序中打开的chrome配另一套虚拟的host环境。
 
 *firefox*：
 
@@ -61,23 +61,23 @@ multiple-host是一个应用程序，解压缩点击运行即可。
 
 由于某些原因，不是所有的浏览器都可以实现打开两个互不影响的实例（如ie），而且其实我们也不需要所有的浏览器都要用两套环境去做对比，但是我们想要测试其他浏览器比如ie的时候，也想用虚拟host怎么办？
 
-可以打开系统代理![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/4.png)，让所有的请求都受这个虚拟host的影响，windows用户我提供了一个快捷的方式，可以一键配置和关闭系统host，mac用户由于权限问题，暂时需要自己去 设置。设置了系统代理之后，所有的浏览器都可以享受到虚拟host的配置，而且是事实生效的。
+可以打开系统代理![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/4.png)，让所有的请求都受这个虚拟host的影响，windows用户我提供了一个快捷的方式，可以一键配置和关闭系统host，mac用户由于权限问题，暂时需要自己去 设置。设置了系统代理之后，所有的浏览器都可以享受到虚拟host的配置，而且是事实生效的。
 
 #### <a name="proxySetting"></a>代理host设置
 代理host设置我借用了一个管理host的chrome插件，在保留它核心功能的同时，设置了更贴切我们使用场景的文本编辑模式，从而可以轻松设置这套虚拟host。  
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/7.png)  
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/6.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/7.png)  
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/6.png)
 
 #### <a name="log"></a>日志输出
 日志输出用于实时打印当前的host情况，当请求被host处理过时，就会打印出一条日志显示当前请求被指向了哪个host，从而让你清晰的知道当前处于哪套环境。   
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/8.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/8.png)
 
 #### <a name="settings"></a>设置
 设置非常简单，如果你的chrome和firefox没有安装在C盘，需要你在设置中调整一下chrome和firefox的启动路径。
 
 如果9393端口被你的其它程序占用，你也可以在设置中更改代理端口。
 
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/9.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/9.png)
 
 ## <a name="questions"></a>常见问题
 
@@ -104,4 +104,4 @@ PS: 如果下载更新失败，可手动下载最新版，由于multiple-host并
 
 **PPS:由于外网还没找到好的服务器，暂时不支持自动更新，只能在百度云下载**
 
-![](https:/raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/10.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/10.png)
