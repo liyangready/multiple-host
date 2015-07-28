@@ -31,7 +31,7 @@ multiple-host就是为了解决烦人的host问题而诞生的。
 
 效果图：
 
-![](http://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/1.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/1.png)
 
 ## <a id="how">如何使用</a>
 
