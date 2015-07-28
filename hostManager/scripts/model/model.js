@@ -30,27 +30,9 @@
     enable : false,
     hide : false,
     hostname : "",
-    line : "user center",
+    line : "user center",qu
     next : Entry对象
-    }
-
- 导入数据的格式:
-     # user center //这是组名
-     #192.168.235.63    l-api.user.qunar.com # 单条注释注释注释注释 //注意,这里的#后表示单条注释
-     #192.168.235.63    api.user.qunar.com
-
-     # dev //这是组名
-     #192.168.237.71    simg2.qunarzz.com
-     #192.168.237.71    simg1.qunarzz.com
-
-     # test==@qzz //这是工程名,其中test是工程名,==@是分隔符,分隔符之后为组名
-     #127.0.0.2	   qunarzz.com
-
-     # test==@fekit //这是工程名,其中test是工程名,==@是分隔符,分隔符之后为组名
-     #127.0.0.2    qunarzz.com
-     #192.168.237.73	qunarzz.com
-     #192.168.237.74	qunarzz.com
-     #192.168.235.63	l-api.user.qunar.com
+ }
  **/
 var fs = require("fs");
 define(function (require, exports) {
@@ -194,7 +176,7 @@ define(function (require, exports) {
             data = data || BackModel.get('data') || exports.loadData(),
             i, c, d, entry;
 
-        //类似这样的数组:['# user center', '192.168.235.63 user.qunar.com', '192.168.235.63 headshot.user.qunar.com']
+        //类似这样的数组:
         //console.log('exports.parseData content : ', content, content.join(','));
         for (i = 0; i < content.length; i++) {
             entry = new Entry();
