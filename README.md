@@ -1,6 +1,9 @@
 
 # Multiple-host
 
+**下载地址：** [for win64](http://pan.baidu.com/s/1ntOkGR3) [for osx64](http://pan.baidu.com/s/1qWn6Pa8)
+
+## 前言
 无论你是开发、QA还是产品，在目前的开发及测试中都离不开host。host为开发和测试带来了诸多便利，但也有很多烦恼：
 
 + 切换host总是不能立即生效，换一套host环境经常需要重启浏览器。
