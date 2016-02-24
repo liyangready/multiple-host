@@ -10,16 +10,12 @@ var ContentView = Backbone.View.extend({
         var showViewClass = '.js-' + this.model.get("hashName");
         var toClass = ".js-to-" + this.model.get("hashName");
         $(".js-content").hide();
-        $(showViewClass).show();
         this.beforeShow();
+        $(showViewClass).show();
         $(".selected").removeClass("selected");
         $(toClass).addClass("selected");
     },
-    "initialize": function() {
-
-    },
-    "beforeShow": function() {
-    }
+    "beforeShow": function() {}
 });
 var startModel = new ContentModel();
 var logModel = new ContentModel();
@@ -35,7 +31,66 @@ var StartView = ContentView.extend({
     "model": startModel,
     "el": $(".js-start")[0],
     "events": {
-        "click .js-browser": "changeBrowser"
+        "click .js-browser": "changeBrowser",
+        "click #open_chrome": "openChrome",
+        "click #open_firefox": "openFirefox",
+        "click #change_system_proxy": "changeSystemProxy"
+    },
+    "openChrome": function(e) {
+        var target = e.target;
+        if ($(target).hasClass("lock")) {
+            return;
+        }
+        try {
+            var port = localStorage.getItem("serverPort") || 9393;
+            $(target).addClass("lock");
+            $(target).html("启动中...");
+            platform.startChrome(function(error) {
+                if (error) {
+                    logger.doLog("log", error.message );
+                }
+                else {
+                    logger.doLog("log", "chrome启动成功，代理端口: " + port );
+                }
+
+            });
+
+            setTimeout(function() {
+                $(target).removeClass("lock");
+                $(target).html("唤起代理chrome");
+            }, 5000);
+
+        } catch (err) {
+            logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+        }
+    },
+    "openFirefox": function(e) {
+        var target = e.target;
+        if ($(target).hasClass("lock")) {
+            return;
+        }
+        try {
+            var port = localStorage.getItem("serverPort") || 9393;
+            $(target).addClass("lock");
+            $(target).html("启动中...");
+
+            platform.startFirefox(function(error) {
+                if (error) {
+                    logger.doLog("log", error.message );
+                }
+                else {
+                    logger.doLog("log", "firefox启动成功，代理端口: " + port );
+                }
+
+            });
+            setTimeout(function() {
+               $(target).removeClass("lock");
+               $(target).html("唤起代理firefox");
+            }, 5000);
+
+        } catch (err) {
+            logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+        }
     },
     "changeBrowser": function(e) {
         var className = ".js-" + $(e.target).data("name");
@@ -47,6 +102,40 @@ var StartView = ContentView.extend({
         $(".js-detail").hide();
         $(e.target).addClass("choosed");
         $choose.show();
+    },
+    "changeSystemProxy": function(e) {
+        var $target = $(event.target);
+        try {
+            var port = localStorage.getItem("serverPort") || 9393;
+
+            if ($target.hasClass("open_btn")) {
+                platform.setSystemProxy(function(error) {
+                    if (error) {
+                        logger.doLog("log", error.message );
+                    }
+                    else {
+                        logger.doLog("log", "系统代理设置成功，代理端口: " + port );
+                        $target.removeClass("open_btn").addClass("close_btn").html("关闭系统代理");
+                    }
+                    
+                });
+            }
+            else {
+                platform.disableSystemProxy(function(error) {
+                    if (error) {
+                        logger.doLog("log", error.message );
+                    }
+                    else {
+                        logger.doLog("log", "系统代理关闭成功 ");
+                        $target.removeClass("close_btn").addClass("open_btn").html("打开系统代理");
+                    }
+                    
+                });
+            }
+        } catch (err) {
+            logger.doLog("error", "Error while trying to start child process: " + JSON.stringify(err) );
+        }
+
     }
 });
 var startView = new StartView();
@@ -104,6 +193,9 @@ var SettingsView = ContentView.extend({
         this.$el.find(".js-chrome-path .js-showPath").val(chromePath);
         this.$el.find(".js-firefox-path .js-showPath").val(firefoxPath);
         this.$el.find("#minifySetting").prop('checked', minifySetting);
+        if (platform.platform === 'mac') { //osx无法选择到应用程序
+            this.$el.find('.js-change-path').hide();
+        }
     }
 });
 var LogView = ContentView.extend({
@@ -123,10 +215,12 @@ var LogView = ContentView.extend({
 });
 
 var HostView = ContentView.extend({
+    "el": $(".js-host")[0],
     "beforeShow": function() {
-        this.el.children[0].contentWindow.view.refresh(false, 'hosts'); //每次更新一遍
-    },
-    "el": $(".js-host")[0]
+        // !this.show &&
+        // this.$el.append('');
+        // this.show = true;
+    }
 });
 var logView = new LogView();
 var hostView = new HostView({"model": hostModel});
@@ -140,16 +234,12 @@ var AppRouter  = Backbone.Router.extend({
         "pages/settings": "settings"
     },
     "initialize": function() {
-
-
-
     },
     "start": function() {
         startView.switchView();
     },
     "log": function() {
         logView.switchView();
-
     },
     "host": function() {
         hostView.switchView();

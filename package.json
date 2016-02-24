@@ -2,7 +2,7 @@
     "name": "multiple-host",
     "main": "main.html",
     "node-main": "nodemain.js",
-    "author": "liyangready@gmail.com",
+    "author": "leon.li@qunar.com",
     "window": {
         "width": 760,
         "height": 600,
@@ -22,7 +22,7 @@
             "url": ""
         }
     },
-    "manifestUrl": "",
+    "manifestUrl": "https://raw.githubusercontent.com/liyangready/static_source/master/multiple-host/package.json",
     "node-remote": "*",
-    "version": "0.0.9"
+    "version": "1.0.4"
 }

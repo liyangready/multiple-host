@@ -24,8 +24,8 @@ function setConfig(name, value) {
 
 function startNode() {
     var logger = global.window.logger;
-    var gui = global.window.nwDispatcher.requireNwGui();
-    var hostPath = path.join( gui.App.dataPath , './hosts');
+    // var gui = global.window.nwDispatcher.requireNwGui();
+    // var hostPath = path.join( gui.App.dataPath , './hosts');
 
     logger.doLog("log", "node代码启动成功,端口：" + ( global.window.localStorage.getItem("serverPort") || 9393 ));
 
@@ -33,8 +33,7 @@ function startNode() {
         port:  global.window.localStorage.getItem("serverPort") || 9393,
         onBeforeRequest: function(req) {
             try {
-
-                var host = findHost(hostPath, req.host);
+                var host = findHost(global.window.__hostState, req.host);
                 var sysTemHost = findHost(CONFIG.systemHostFilePath, req.host);
 
                 if (host) {
