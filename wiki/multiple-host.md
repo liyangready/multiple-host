@@ -76,9 +76,9 @@ multiple-host是一个应用程序，解压缩点击运行即可。
 
 代理host设置我用react写了一个支持[多环境切换的host工具](https://github.com/liyangready/host-manager)，支持筛选、一键启用等功能，从而可以轻松管理虚拟host。
 
-![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/7.png)  
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/7_1.png)  
 
-![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/6.png)
+![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/6_1.png)
 
 #### <a name="log"></a>日志输出
 
