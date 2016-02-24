@@ -1,6 +1,7 @@
 
 
 # Multiple-host
+下载地址： [百度云](https://github.com/liyangready/multiple-host)
 
 无论你是开发、QA还是产品，在目前的开发及测试中都离不开host。host为开发和测试带来了诸多便利，但也有很多烦恼：
 
@@ -13,16 +14,12 @@ multiple-host就是为了解决烦人的host问题而诞生的 , 它采用了 **
 
 
 + [它可以做什么](#doWhat)    
-  
 + [如何使用](#how)    
-  
   - [开始使用](#startUse)    
   - [代理host设置](#proxySetting)    
   - [日志输出](#log)    
   - [设置](#settings)   
-
 + [常见问题](#questions)
-  
   - [和nginx共存](#nginx)
   - [和fiddler共存](#fiddler)
   - [自动更新](#update)
