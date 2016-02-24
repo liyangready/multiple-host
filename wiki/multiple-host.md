@@ -16,20 +16,16 @@ multiple-host就是为了解决烦人的host问题而诞生的 , 它采用了 **
   
 + [如何使用](#how)    
   
-  ``` 
   - [开始使用](#startUse)    
   - [代理host设置](#proxySetting)    
   - [日志输出](#log)    
   - [设置](#settings)   
-  ```
-  
+
 + [常见问题](#questions)
   
-  ``` 
   - [和nginx共存](#nginx)
   - [和fiddler共存](#fiddler)
   - [自动更新](#update)
-  ```
 
 ## <a name="doWhat" id="doWhat"></a>它可以做什么
 
