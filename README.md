@@ -1,7 +1,7 @@
 
 
 # Multiple-host
-下载地址： [百度云](https://github.com/liyangready/multiple-host)
+下载地址： [百度云](http://yun.baidu.com/s/1hrv34wc)
 
 无论你是开发、QA还是产品，在目前的开发及测试中都离不开host。host为开发和测试带来了诸多便利，但也有很多烦恼：
 
