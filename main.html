@@ -35,7 +35,7 @@
                 <div class="info">
                     <h3>使用说明：</h3>
                     <p>1 被唤起的浏览器将会忽略系统host配置，使用<a href="#pages/host">代理host</a></p>
-                    <p>2 代理hosts设置新增拖拽功能，支持拖拽到全局和拖拽到组。</p>
+                    <p>2 代理hosts只对唤起的浏览器进程有效，并且实时生效，不需要重启浏览器。</p>
                     <p>3 可以设置代理端口号和chrome启动路径，<a href="#pages/settings">设置</a></p>
                     <p>4 被唤起的chrome没有用户和插件，默认打开一篇wiki，你可以以此作为标志来区分当前使用的是否为代理浏览器。</p>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="info">
                     <h3>使用说明：</h3>
                     <p>1 被唤起的浏览器将会忽略系统host配置，使用<a href="#pages/host">代理host</a></p>
-                    <p>2 代理hosts设置新增拖拽功能，支持拖拽到全局和拖拽到组。</p>
+                    <p>2 代理hosts只对唤起的浏览器进程有效，并且实时生效，不需要重启浏览器。</p>
                     <p>3 可以设置代理端口号和chrome启动路径，<a href="#pages/settings">设置</a></p>
                     <p>4 被唤起的firefox默认打开一篇wiki，你可以以此作为标志来区分当前使用的是否为代理浏览器。</p>
                 </div>
@@ -63,7 +63,7 @@
                     <p>3 所以，当你需要使用 ie 和其他浏览器的时候你可以点击打开系统代理，当你需要多hosts共存的时候可以点击关闭，然后打开代理chrome/firefox。</p>
                     <div class="usr-info">
                         <p>mac用户:</p>
-                        <p> ● 由于修改系统代理设置需要sudo权限，有可能需要输入sudo密码。如果失败可自行修改。</p>
+                        <p> ● 由于mac系统需要更改不同网络配件的网络设置，启用之后请自行检查是否修改成功。</p>
                         <p> ● 步骤：系统偏好设置->网络->高级->设置代理到127.0.0.1:<span class="js-serverPort"></span></p>
                         <p>windows用户：</p>
                         <p> ● 如果失败可以尝试用 管理员身份运行程序。也可以自行检查或者设置代理。</p>
@@ -131,7 +131,7 @@
 <div id="inset" style="display: none;">
 
     <!--<div class="buttons">-->
-        <!--<button id="open_btn">唤起代理chrome</button>-->
+    <!--<button id="open_btn">唤起代理chrome</button>-->
     <!--</div>-->
     <!--<div class="version" ></div>-->
     <!--<span class="version" id="version"></span>-->

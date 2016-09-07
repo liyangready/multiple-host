@@ -11,8 +11,8 @@
         "min_height": 600,
         "max_width": 760,
         "max_height": 600,
-        "frame": false,
-        "toolbar": false
+        "frame": true,
+        "toolbar": true
     },
     "packages": {
         "win": {
@@ -24,5 +24,5 @@
     },
     "manifestUrl": "https://raw.githubusercontent.com/liyangready/static_source/master/multiple-host/package.json",
     "node-remote": "*",
-    "version": "1.0.4"
+    "version": "1.0.5"
 }

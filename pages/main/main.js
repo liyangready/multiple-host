@@ -8,20 +8,20 @@ var platform = require("./lib/platform");
 
 
 //取消拖拽默认事件
-$(document).on({
-    dragleave:function(e){
-        e.preventDefault();
-    },
-    drop:function(e){
-        e.preventDefault();
-    },
-    dragenter:function(e){
-        e.preventDefault();
-    },
-    dragover:function(e){
-        e.preventDefault();
-    }
-});
+// $(document).on({
+//     dragleave:function(e){
+//         e.preventDefault();
+//     },
+//     drop:function(e){
+//         e.preventDefault();
+//     },
+//     dragenter:function(e){
+//         e.preventDefault();
+//     },
+//     dragover:function(e){
+//         e.preventDefault();
+//     }
+// });
 
 // Load native UI library
 var gui = require('nw.gui');
