@@ -1,7 +1,9 @@
 
 
 # Multiple-host
-下载地址： [百度云](http://yun.baidu.com/s/1hrv34wc)
+下载地址： [私人主机-win版](http://104.224.164.54/multiple-host/1.0.6/win/multiple-host.zip)
+           [私人主机-mac版](http://104.224.164.54/multiple-host/1.0.6/mac/multiple-host.zip)
+           [百度云](http://yun.baidu.com/s/1hrv34wc)
 
 无论你是开发、QA还是产品，在目前的开发及测试中都离不开host。host为开发和测试带来了诸多便利，但也有很多烦恼：
 
@@ -111,8 +113,7 @@ A： multiple-host和fiddler原理一样，都是起了一个代理server转发�
 
 A: multiple-host实现了一套自动更新机制，当有更新时会自动推送，用户点击确定更新之后，multiple-host会自动下载和覆盖当前目录的程序。
 
-PS: 如果下载更新失败，可手动下载最新版，由于multiple-host并不需要按照，删除或者覆盖原来的文件夹就行了
+PS: 由于私人主机位于海外，如果更新过慢或者失败，可手动下载最新版，由于multiple-host并不需要按照，删除或者覆盖原来的文件夹就行了
 
-**PPS:由于外网还没找到好的服务器，暂时不支持自动更新，只能在百度云下载**
 
 ![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/10.png)
