@@ -20,11 +20,12 @@ multiple-host就是为了解决烦人的host问题而诞生的 , 它采用了 **
   - [开始使用](#startUse)    
   - [代理host设置](#proxySetting)    
   - [日志输出](#log)    
-  - [设置](#settings)   
+  - [设置](#settings) 
 + [常见问题](#questions)
   - [和nginx共存](#nginx)
   - [和fiddler共存](#fiddler)
   - [自动更新](#update)
++ [changelog](#changelog)
 
 ## <a name="doWhat" id="doWhat"></a>它可以做什么
 
@@ -117,3 +118,9 @@ PS: 由于私人主机位于海外，如果更新过慢或者失败，可手动�
 
 
 ![](https://raw.githubusercontent.com/liyangready/multiple-host/master/wiki/resource/10.png)
+
+## <a id="changelog">changelog</a>
+### 1.0.6 修复删除default host引起的问题
+### 1.0.5 设置默认的host
+### 1.0.1-1.0.4 琐碎bug修复
+### 1.0.0 UI风格大改版，利用react+redux构建可用性更强的UI
