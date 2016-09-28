@@ -22,8 +22,10 @@ multiple-host就是为了解决烦人的host问题而诞生的 , 它采用了 **
   - [日志输出](#log)    
   - [设置](#settings) 
 + [常见问题](#questions)
+  - [移动端测试](#mobile)
   - [和nginx共存](#nginx)
   - [和fiddler共存](#fiddler)
+  - [和charles共存](#charles)
   - [自动更新](#update)
 + [changelog](#changelog)
 
@@ -91,6 +93,10 @@ multiple-host是一个应用程序，解压缩点击运行即可。
 ![](https://raw.githubusercontent.com/liyangready/static_source/master/multiple-host/images/9.png)
 
 ## <a name="questions"></a>常见问题
+### <a name="mobile"></a>Q:移动端能否借用这个host工具？
+
+A:和charles等工具使用方法一样，将手机的请求代理指向本机ip:9393 端口，即可使用。如果还需要配合charles，参加下述的和charles共存。
+
 
 ### <a name="nginx"></a>Q:使用了multiple-host，还想用nginx怎么办？
 
@@ -109,6 +115,15 @@ A： multiple-host和fiddler原理一样，都是起了一个代理server转发�
 你会发现fiddler可以正常记录所有请求，同时虚拟host也会生效。
 
 如果上述步骤没有成功，检查fiddler的 **Tools -> Fiddler Options -> GateWay** 中是否选上了默认的 **Use System Proxy**
+
+
+### <a name="charles"></a>Q:使用了multiple-host，还想用charles怎么办？
+
+A： 同fiddler，charles和multiple-host共存也需要实现 请求-> multiple-host -> charles -> server 的链。具体配置在charles：
+**Proxy - External Proxy Settings ， 勾选 Use external  proxy server ，然后配置 http 和 https 请求的地址为 ：
+127.0.0.1:9393**
+
+然后将你的浏览器/手机代理指向charles，刷新发现请求会被charles采集到，同时，我们的host工具也可以生效。
 
 ### <a name="update"></a>Q:有bug或者出了新功能怎么更新？
 
