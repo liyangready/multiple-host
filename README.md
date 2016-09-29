@@ -104,7 +104,7 @@ A: multiple-host根据host转发请求的时候并没有修改http header中的 
 
 ### <a name="fiddler"></a>Q:使用了multiple-host，还想用fiddler怎么办？
 
-A： multiple-host和fiddler原理一样，都是起了一个代理server转发请求，想要虚拟host生效的同时fiddler也生效，必须实现multiple-host是fiddler的上游，也就是实现 请求-> multiple-host -> fiddler -> server 的链。好在fiddler提供了这样的功能。
+A： multiple-host和fiddler原理一样，都是起了一个代理server转发请求，想要虚拟host生效的同时fiddler也生效，必须实现multiple-host是fiddler的上游，也就是实现 请求-> fiddler -> multiple-host -> server 的链。好在fiddler提供了这样的功能。
 
 使用步骤： 
 
@@ -119,11 +119,15 @@ A： multiple-host和fiddler原理一样，都是起了一个代理server转发�
 
 ### <a name="charles"></a>Q:使用了multiple-host，还想用charles怎么办？
 
-A： 同fiddler，charles和multiple-host共存也需要实现 请求-> multiple-host -> charles -> server 的链。具体配置在charles：
-**Proxy - External Proxy Settings ， 勾选 Use external  proxy server ，然后配置 http 和 https 请求的地址为 ：
-127.0.0.1:9393**
+A： 同fiddler类似，charles和multiple-host共存也需要实现 请求-> multiple-host -> charles -> server 的链。
+具体配置在charles：
+ + **Proxy - External Proxy Settings ** 
+ + ** 勾选 Use external  proxy server ** 
+ + **配置 http 和 https 请求的地址为 ：127.0.0.1:9393** (端口号默认为9393，修改过则不一样)
 
-然后将你的浏览器/手机代理指向charles，刷新发现请求会被charles采集到，同时，我们的host工具也可以生效。
+![](https://github.com/liyangready/static_source/blob/master/multiple-host/images/11.png?raw=true)
+
+然后将你的**浏览器/手机代理指向charles**（默认为本机ip:8888），刷新发现请求会被charles采集到，同时，我们的host工具也可以生效。
 
 ### <a name="update"></a>Q:有bug或者出了新功能怎么更新？
 
