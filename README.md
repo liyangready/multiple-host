@@ -121,8 +121,8 @@ A： multiple-host和fiddler原理一样，都是起了一个代理server转发�
 
 A： 同fiddler类似，charles和multiple-host共存也需要实现 请求-> multiple-host -> charles -> server 的链。
 具体配置在charles：
- + **Proxy - External Proxy Settings ** 
- + ** 勾选 Use external  proxy server ** 
+ + **Proxy - External Proxy Settings** 
+ + **勾选 Use external  proxy server** 
  + **配置 http 和 https 请求的地址为 ：127.0.0.1:9393** (端口号默认为9393，修改过则不一样)
 
 ![](https://github.com/liyangready/static_source/blob/master/multiple-host/images/11.png?raw=true)
