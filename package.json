@@ -1,28 +1,19 @@
 {
-    "name": "multiple-host",
-    "main": "main.html",
-    "node-main": "nodemain.js",
-    "author": "leon.li@qunar.com",
-    "window": {
-        "width": 760,
-        "height": 600,
-        "position": "center",
-        "min_width": 760,
-        "min_height": 600,
-        "max_width": 760,
-        "max_height": 600,
-        "frame": false,
-        "toolbar": false
-    },
-    "packages": {
-        "win": {
-            "url": ""
-        },
-        "mac": {
-            "url": ""
-        }
-    },
-    "manifestUrl": "https://raw.githubusercontent.com/liyangready/static_source/master/multiple-host/package.json",
-    "node-remote": "*",
-    "version": "1.0.6"
+  "name": "multiple-host",
+  "version": "1.0.0",
+  "description": "新版本",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liyangready/multiple-host.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liyangready/multiple-host/issues"
+  },
+  "homepage": "https://github.com/liyangready/multiple-host#readme"
 }
