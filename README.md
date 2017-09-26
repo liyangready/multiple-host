@@ -1,4 +1,4 @@
-
+新版本正在开发中，感谢大家支持！会提升稳定性和便捷性。
 
 # Multiple-host
 下载地址： [私人主机-win版](http://104.224.164.54/multiple-host/1.0.6/win/multiple-host.zip)
