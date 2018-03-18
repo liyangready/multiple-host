@@ -43,7 +43,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunk, router, logger)
 );
 
-export = {
+export default {
   history,
   configureStore(initialState: Object | void) {
     const store = createStore(rootReducer, initialState, enhancer);

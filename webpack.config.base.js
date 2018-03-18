@@ -3,6 +3,8 @@
  */
 
 const path = require('path');
+const tsImportPluginFactory = require('ts-import-plugin');
+
 const {
   dependencies: externals
 } = require('./app/package.json');
@@ -11,7 +13,18 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.tsx?$/,
-      loaders: ['react-hot-loader/webpack', 'ts-loader'],
+      loaders: ['react-hot-loader/webpack', {
+        loader: 'ts-loader',
+        options: {
+          getCustomTransformers: () => ({
+            before: [ tsImportPluginFactory({
+              libraryName: 'antd',
+              libraryDirectory: 'es',
+              style: 'css',
+            })],
+          })
+        }
+      }],
       exclude: /node_modules/
     }, {
       test: /\.json$/,
